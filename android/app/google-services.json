@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "713340770929",
+    "project_id": "room-sharing-f0698",
+    "storage_bucket": "room-sharing-f0698.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:713340770929:android:0b85cd6dccb81c4aac99d0",
+        "android_client_info": {
+          "package_name": "com.example.room_sharing"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "713340770929-63clgi03cmqk5m7abro3f2d5vk7fjj60.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBveE2WiFfeG5AYj_RsganomOB70kiibeo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "713340770929-63clgi03cmqk5m7abro3f2d5vk7fjj60.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
