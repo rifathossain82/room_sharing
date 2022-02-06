@@ -351,65 +351,112 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
     try{
       String food_status;
       if(selectedRadio==1){
-        food_status="With Food";
+        food_status="Yes";
       }
       else{
-        food_status="Without Food";
+        food_status="No";
       }
+      DateTime dateTime=DateTime.now();
+      String date='${dateTime.day}-${dateTime.month}-${dateTime.year}';
+
+      TimeOfDay timeOfDay=TimeOfDay.now();
+      String time='${timeOfDay.hour}:${timeOfDay.minute} ${timeOfDay.period.name}';
+
+      print(date);
+      print(time);
 
       File? file;
-      UploadTask task;
-      List<String> photo=[];
-      //to upload image in firebase storage
+      UploadTask? task0;
+      UploadTask? task1;
+      UploadTask? task2;
+      UploadTask? task3;
+      UploadTask? task4;
+
+      String img0='';
+      String img1='';
+      String img2='';
+      String img3='';
+      String img4='';
+
       for(int i=0;i<imageFileList.length;i++){
         final filename=basename(File(imageFileList[i].path).path);
         final destination="files/post/${titleController.text}/$filename";
         file=await saveImagePermanently(imageFileList[i].path);
-        task=FirebaseApi.uploadTask(destination, file!)!;
+
+        //to upload image in firebase firestore
+        if(i==0){
+          task0=FirebaseApi.uploadTask(destination, file!)!;
+        }
+        if(i==1){
+          task1=FirebaseApi.uploadTask(destination, file!)!;
+        }
+        if(i==2){
+          task2=FirebaseApi.uploadTask(destination, file!)!;
+        }
+        if(i==3){
+          task3=FirebaseApi.uploadTask(destination, file!)!;
+        }
+        if(i==4){
+          task4=FirebaseApi.uploadTask(destination, file!)!;
+        }
+
 
       }
 
-      print(photo.length);
+      for(int i=0;  i<imageFileList.length;i++){
+        if(i==0){
+          final snapshot=await task0!.whenComplete((){
+            setState(() {});
+          });
+          img0=await snapshot.ref.getDownloadURL();
+        }
+        if(i==1){
+          final snapshot=await task1!.whenComplete((){
+            setState(() {});
+          });
+          img1=await snapshot.ref.getDownloadURL();
+        }
+        if(i==2){
+          final snapshot=await task2!.whenComplete((){
+            setState(() {});
+          });
+          img2=await snapshot.ref.getDownloadURL();
+        }
+        if(i==3){
+          final snapshot=await task3!.whenComplete((){
+            setState(() {});
+          });
+          img3=await snapshot.ref.getDownloadURL();
+        }
+        if(i==4){
+          final snapshot=await task4!.whenComplete((){
+            setState(() {});
+          });
+          img4=await snapshot.ref.getDownloadURL();
+        }
+      }
 
-      // //await of uploading and create snapshot to download image later
-      // List<TaskSnapshot> snapshot=[];
-      // for(int i=0;i<imageFileList.length;i++){
-      //   snapshot[i]=await task!.whenComplete((){
-      //     setState(() {
-      //
-      //     });
-      //   });
-      // }
-      //
-      //
-      // //to download all images
-      // List<String> photo=[];
-      // for(int i=0;i<5;i++){
-      //   try{
-      //     photo[i]=await snapshot[i].ref.getDownloadURL();
-      //   }
-      //   catch(e){
-      //     photo[i]='';
-      //   }
-      // }
-      //
-      // post.add({
-      //   'date':"04-02-2022",
-      //   'time':"4:25 PM",
-      //   'title': titleController.text,
-      //   'description': desController.text,
-      //   'location': locationController.text,
-      //   'price': priceController.text,
-      //   'food': food_status,
-      //   'food_price': foodPriceController,
-      //   'img1': photo[0],
-      //   'img2': photo[1],
-      //   'img3': photo[2],
-      //   'img4': photo[3],
-      //   'img5': photo[4],
-      // });
-      //
-      // print('success');
+
+      post.add({
+        'date': date,
+        'time': time,
+        'title': titleController.text,
+        'description': desController.text,
+        'location': locationController.text,
+        'price': priceController.text,
+        'food': food_status,
+        'food_price': foodPriceController.text,
+        'img1': img0,
+        'img2': img1,
+        'img3': img2,
+        'img4': img3,
+        'img5': img4,
+      }).then((value){
+        print('Success');
+      })
+      .onError((error, stackTrace){
+        print(error);
+      });
 
     }
     catch(e){

@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: app_name,
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+      home: HomeScreen(),
       routes: {
         PageRoutes.home:(context)=> HomeScreen(),
         PageRoutes.createPost:(context)=> CreatePostScreen(),
