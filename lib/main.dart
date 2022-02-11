@@ -22,7 +22,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: app_name,
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      home: LoginScreen(),
+      theme: ThemeData(primarySwatch: Colors.purple,primaryColor: Colors.purple),
       routes: {
         PageRoutes.home:(context)=> HomeScreen(),
         PageRoutes.createPost:(context)=> CreatePostScreen(),

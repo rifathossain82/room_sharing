@@ -17,6 +17,7 @@ class MyPostsScreen extends StatelessWidget {
       body: Center(
         child: Text('This is Contact Page'),
       ),
+      // ignore: prefer_const_constructors
       drawer:NavigationDrawer(),
     );
   }

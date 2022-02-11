@@ -1,19 +1,29 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:room_sharing/constraints/colors.dart';
+import 'package:room_sharing/screens/HomeScreen.dart';
 import 'package:room_sharing/screens/registerScreen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../services/showMessage.dart';
 import '../widgets/background.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key? key}) : super(key: key);
 
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
   final formKey = GlobalKey<FormState>();
+  var obscureValue = true;
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery
-        .of(context)
-        .size;
+    Size size = MediaQuery.of(context).size;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -30,23 +40,22 @@ class LoginScreen extends StatelessWidget {
                   "LOGIN",
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: Color(0xFF2661FA),
-                      fontSize: 36
-                  ),
+                      color: color1,
+                      fontSize: 36),
                   textAlign: TextAlign.left,
                 ),
               ),
-
               SizedBox(height: size.height * 0.03),
-
               Container(
                 alignment: Alignment.center,
                 margin: EdgeInsets.symmetric(horizontal: 40),
                 child: TextFormField(
+                  cursorColor: color1,
                   validator: (value) {
-                    if (value!.isEmpty ||
-                        !RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w]{2,4}').hasMatch(
-                            value!)) {
+                    if (value!.isEmpty) {
+                      return 'Email required!';
+                    }
+                    else if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w]{2,4}').hasMatch(value)) {
                       return 'Enter Correct Email Address!';
                     }
                     else {
@@ -58,20 +67,20 @@ class LoginScreen extends StatelessWidget {
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
                       labelText: "Email Address",
-                      suffixIcon: Icon(Icons.email_outlined)
-                  ),
+                      suffixIcon: Icon(Icons.email_outlined)),
                 ),
               ),
-
               SizedBox(height: size.height * 0.02),
-
               Container(
                 alignment: Alignment.center,
                 margin: EdgeInsets.symmetric(horizontal: 40),
                 child: TextFormField(
                   validator: (value) {
-                    if (value!.isEmpty || !RegExp('').hasMatch(value!)) {
+                    if (value!.isEmpty) {
                       return 'Password required!';
+                    }
+                    else if (value.length<6) {
+                      return 'Password must be 6 characters!';
                     }
                     else {
                       return null;
@@ -79,39 +88,34 @@ class LoginScreen extends StatelessWidget {
                   },
                   controller: passController,
                   maxLines: 1,
-                  obscureText: true,
+                  obscureText: obscureValue,
                   obscuringCharacter: '*',
                   decoration: InputDecoration(
                       labelText: "Password",
                       suffixIcon: IconButton(
-                          onPressed: () {}, icon: Icon(Icons.visibility_off))
-                  ),
+                          onPressed: () {
+                            setState(() {
+                              obscureValue=!obscureValue;
+                            });
+                          }, icon: Icon(obscureValue?Icons.visibility_off:Icons.visibility))),
                 ),
               ),
-
               Container(
                 alignment: Alignment.centerRight,
                 margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
                 child: Text(
                   "Forgot your password?",
-                  style: TextStyle(
-                      fontSize: 12,
-                      color: Color(0XFF2661FA)
-                  ),
+                  style: TextStyle(fontSize: 12, color: color1),
                 ),
               ),
-
               SizedBox(height: size.height * 0.05),
-
               Container(
                 alignment: Alignment.centerRight,
                 margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
                 child: RaisedButton(
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
-                      //Navigator.of(context).pop();
-                      emailController.clear();
-                      passController.clear();
+                      loginMethod(context);
                     }
                   },
                   shape: RoundedRectangleBorder(
@@ -122,41 +126,37 @@ class LoginScreen extends StatelessWidget {
                     alignment: Alignment.center,
                     height: 50.0,
                     width: size.width * 0.5,
-                    decoration: new BoxDecoration(
+                    decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(80.0),
-                        gradient: new LinearGradient(
-                            colors: [
-                              Color.fromARGB(255, 255, 136, 34),
-                              Color.fromARGB(255, 255, 177, 41)
-                            ]
-                        )
-                    ),
+                        gradient: LinearGradient(colors: [
+                          color2,
+                          color1,
+                        ])),
                     padding: const EdgeInsets.all(0),
-                    child: Text(
+                    child: const Text(
                       "LOGIN",
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold
-                      ),
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
               ),
-
               Container(
                 alignment: Alignment.centerRight,
-                margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+                margin: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
                 child: GestureDetector(
                   onTap: () => {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterScreen()))
-                },
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => RegisterScreen()))
+                  },
                   child: Text(
                     "Don't Have an Account? Sign up",
                     style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
-                        color: Color(0xFF2661FA)
-                    ),
+                        color: color1),
                   ),
                 ),
               )
@@ -165,5 +165,47 @@ class LoginScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void loginMethod(BuildContext context) async {
+    FirebaseFirestore.instance
+        .collection('user')
+        .where('email', isEqualTo: emailController.text)
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      if (querySnapshot.docs.isEmpty) {
+        print('no user found');
+        showMessage('No User Found!');
+      } else {
+        passwordCheck(context);
+        print('user found');
+      }
+    });
+  }
+
+  void passwordCheck(BuildContext context) async {
+    FirebaseFirestore.instance
+        .collection('user')
+        .where('password', isEqualTo: passController.text)
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      if (querySnapshot.docs.isEmpty) {
+        print('password is not matching');
+        showMessage('Password is not matching!');
+      } else {
+        saveEmail(emailController.text);
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => HomeScreen()));
+        print('Login success');
+        showMessage('Login Success');
+        emailController.clear();
+        passController.clear();
+      }
+    });
+  }
+
+  saveEmail(String email) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    sharedPreferences.setString('email', email);
   }
 }

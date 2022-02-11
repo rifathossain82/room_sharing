@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../services/pageRoute.dart';
@@ -16,11 +15,12 @@ class NavigationDrawer extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           NavigationDrawerHeader(),
+          // ignore: prefer_const_constructors
           SizedBox(height: 15,),
           NavigationDrawerItem(Icons.home, 'Home', ()=>Navigator.pushReplacementNamed(context, PageRoutes.home)),
           NavigationDrawerItem(Icons.post_add, 'Create a Post', ()=>Navigator.pushReplacementNamed(context, PageRoutes.createPost)),
           NavigationDrawerItem(Icons.featured_play_list, 'My Post', ()=>Navigator.pushReplacementNamed(context, PageRoutes.myPost)),
-          //Divider(),
+          Divider(),
           //NavigationDrawerItem(Icons.notifications_active, 'Notifications', ()=>Navigator.pushReplacementNamed(context, PageRoutes.notification)),
          // NavigationDrawerItem(Icons.contact_phone, 'Contact', ()=>Navigator.pushReplacementNamed(context, PageRoutes.contact)),
         ],
