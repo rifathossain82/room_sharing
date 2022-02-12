@@ -3,20 +3,22 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:room_sharing/screens/myPost/EditMyPost.dart';
 import 'package:room_sharing/services/post.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../constraints/colors.dart';
-import '../services/call_email.dart';
-import '../widgets/appbar.dart';
+import '../../constraints/colors.dart';
+import '../../services/call_email.dart';
+import '../../widgets/appbar.dart';
 
-class DetailsScreen extends StatefulWidget {
+class MyPostDetailsScreen extends StatefulWidget {
   Post post;
-  DetailsScreen({Key? key,required this.post}) : super(key: key);
+  var id;
+  MyPostDetailsScreen({Key? key,required this.post,required this.id}) : super(key: key);
 
   @override
-  _DetailsScreenState createState() => _DetailsScreenState();
+  _MyPostDetailsScreenState createState() => _MyPostDetailsScreenState();
 }
 
 var activeIndex=0;
@@ -26,14 +28,14 @@ List<String> images=[];
 var authorName='';
 var authorImg='';
 
-class _DetailsScreenState extends State<DetailsScreen> {
+class _MyPostDetailsScreenState extends State<MyPostDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
     findAuthor();
     return Scaffold(
       appBar: AppBar(
-        title: Text('Room Sharing'),
+        title: Text('My Post'),
         elevation: 0,
         flexibleSpace: MyAppBar(),
       ),
@@ -85,45 +87,13 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 Divider(),
                 Text(widget.post.location,style: TextStyle(fontSize: 14),),
 
-                SizedBox(height: 40,),
-                Text('Author',style: TextStyle(fontSize: 14,fontWeight: FontWeight.w700),),
-                Divider(),
-                Row(
-                  children: [
-                    Container(
-                      height: 50,
-                      width: 50,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(100),
-                          image: DecorationImage(
-                            image: CachedNetworkImageProvider(authorImg),
-                            fit: BoxFit.cover,
-                            alignment: Alignment.center,
-                          )
-                      ),
-                    ),
-                    SizedBox(width: 16,),
-                    Expanded(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(authorName,style: TextStyle(fontSize: 14,),),
-                          Text(widget.post.time,style: TextStyle(fontSize: 12),),
-                          Text(widget.post.date,style: TextStyle(fontSize: 12),),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-
-                SizedBox(height: 20,),
+                SizedBox(height: 30,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     InkWell(
                       onTap: (){
-                        createCall(widget.post.email);
+                       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>EditMyPost(post: widget.post, id: widget.id)));
                       },
                       borderRadius: BorderRadius.circular(4),
                       child: Container(
@@ -141,9 +111,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(Icons.phone,color: Colors.white,),
+                              Icon(Icons.edit,color: Colors.white,),
                               SizedBox(width: 5,),
-                              Text('CALL',style: TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.w500),),
+                              Text('EDIT',style: TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.w500),),
                             ],
                           ),
                         ),
@@ -152,7 +122,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     SizedBox(width: 16,),
                     InkWell(
                       onTap: (){
-                        createEmail(widget.post.email);
+                        widget.id.reference.delete();
+                        Navigator.pop(context);
                       },
                       borderRadius: BorderRadius.circular(4),
                       child: Container(
@@ -170,9 +141,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(Icons.phone,color: Colors.white,),
+                              Icon(Icons.delete,color: Colors.white,),
                               SizedBox(width: 5,),
-                              Text('EMAIL',style: TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.w500),),
+                              Text('DELETE',style: TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.w500),),
                             ],
                           ),
                         ),

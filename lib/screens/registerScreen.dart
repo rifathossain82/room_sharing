@@ -30,12 +30,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController phoneController = TextEditingController();
   TextEditingController addressController = TextEditingController();
 
+  TextEditingController nidNumberController = TextEditingController();
+
   TextEditingController passController = TextEditingController();
   TextEditingController confirmPassController = TextEditingController();
 
   final formKey = GlobalKey<FormState>();
   final formKey2 = GlobalKey<FormState>();
   final formKey3 = GlobalKey<FormState>();
+  final formKeyNid = GlobalKey<FormState>();
 
   int currentStep = 0;
   bool isCompleted = false;
@@ -64,7 +67,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   Future galleryImage() async {
     try {
-      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+      final image = await ImagePicker().pickImage(source: ImageSource.camera);
       if (image == null) return;
 
       //final imageTemporary=File(image.path);   //to set image temporary
@@ -82,7 +85,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   Future galleryImage2() async {
     try {
-      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+      final image = await ImagePicker().pickImage(source: ImageSource.camera);
       if (image == null) return;
 
       //final imageTemporary=File(image.path);   //to set image temporary
@@ -158,16 +161,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   }
                 }
                 else if(currentStep==2){
-                  if(_image==null){
-                    showMessage('1st part of Nid is Empty!!');
-                  }
-                  else if(_image2==null){
-                    showMessage('2nd part of Nid is Empty!!');
-                  }
-                  else{
-                    setState(() {
-                      currentStep += 1;
-                    });
+                  if(formKeyNid.currentState!.validate()){
+                    if(_image==null){
+                      showMessage('1st part of Nid is Empty!!');
+                    }
+                    else if(_image2==null){
+                      showMessage('2nd part of Nid is Empty!!');
+                    }
+                    else{
+                      setState(() {
+                        currentStep += 1;
+                      });
+                    }
                   }
                 }
               }
@@ -478,7 +483,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             child: TextFormField(
               validator: (value){
                 if (value!.isEmpty) {
-                  return 'Phone Number required!';
+                  return 'Email address required!';
                 }
                 else if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w]{2,4}').hasMatch(value)) {
                   return 'Incorrect Email Address!';
@@ -523,12 +528,76 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   Widget nidContent(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        InkWell(
+    return Form(
+      key: formKeyNid,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            alignment: Alignment.center,
+            child: TextFormField(
+              validator: (value){
+                if (value!.isEmpty) {
+                  return 'Nid Number required!';
+                }
+                else if (value.length<13) {
+                  return 'Incorrect Nid Number!';
+                }
+                else {
+                  return null;
+                }
+              },
+              controller: nidNumberController,
+              maxLines: 1,
+              maxLength: 17,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                hintText: "Nid Number",
+                border: OutlineInputBorder(),
+              ),
+            ),
+          ),
+          SizedBox(height: 16,),
+          InkWell(
+              onTap: () {
+                galleryImage();
+              },
+              child: Container(
+                  height: 80,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: color1, width: 1)),
+                  alignment: Alignment.center,
+                  child: Center(
+                      child: _image == null
+                          ? Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text('Choose your 1st part of Nid.',
+                                    style: TextStyle(
+                                      color: Colors.grey,
+                                    )),
+                                Icon(
+                                  Icons.add_photo_alternate_outlined,
+                                  color: Colors.grey,
+                                )
+                              ],
+                            )
+                          : Container(
+                              height: 80,
+                              width: MediaQuery.of(context).size.width,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                image: DecorationImage(
+                                    fit: BoxFit.cover, image: FileImage(_image!)),
+                              ))))),
+          SizedBox(
+            height: 16,
+          ),
+          InkWell(
             onTap: () {
-              galleryImage();
+              galleryImage2();
             },
             child: Container(
                 height: 80,
@@ -538,11 +607,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     border: Border.all(color: color1, width: 1)),
                 alignment: Alignment.center,
                 child: Center(
-                    child: _image == null
+                    child: _image2 == null
                         ? Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text('Choose your 1st part of Nid.',
+                              Text('Choose your 2nd part of Nid.',
                                   style: TextStyle(
                                     color: Colors.grey,
                                   )),
@@ -558,47 +627,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8),
                               image: DecorationImage(
-                                  fit: BoxFit.cover, image: FileImage(_image!)),
-                            ))))),
-        SizedBox(
-          height: 16,
-        ),
-        InkWell(
-          onTap: () {
-            galleryImage2();
-          },
-          child: Container(
-              height: 80,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: color1, width: 1)),
-              alignment: Alignment.center,
-              child: Center(
-                  child: _image2 == null
-                      ? Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text('Choose your 2nd part of Nid.',
-                                style: TextStyle(
-                                  color: Colors.grey,
-                                )),
-                            Icon(
-                              Icons.add_photo_alternate_outlined,
-                              color: Colors.grey,
-                            )
-                          ],
-                        )
-                      : Container(
-                          height: 80,
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            image: DecorationImage(
-                                fit: BoxFit.cover, image: FileImage(_image2!)),
-                          )))),
-        ),
-      ],
+                                  fit: BoxFit.cover, image: FileImage(_image2!)),
+                            )))),
+          ),
+        ],
+      ),
     );
   }
 

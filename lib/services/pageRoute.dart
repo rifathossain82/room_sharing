@@ -1,6 +1,6 @@
 
 import 'package:room_sharing/screens/HomeScreen.dart';
-import 'package:room_sharing/screens/MyPostsScreen.dart';
+import 'package:room_sharing/screens/myPost/MyPostsScreen.dart';
 import 'package:room_sharing/screens/createPostScreen.dart';
 
 class PageRoutes{

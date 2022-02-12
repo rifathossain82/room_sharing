@@ -21,8 +21,11 @@ class NavigationDrawer extends StatelessWidget {
           NavigationDrawerItem(Icons.post_add, 'Create a Post', ()=>Navigator.pushReplacementNamed(context, PageRoutes.createPost)),
           NavigationDrawerItem(Icons.featured_play_list, 'My Post', ()=>Navigator.pushReplacementNamed(context, PageRoutes.myPost)),
           Divider(),
-          //NavigationDrawerItem(Icons.notifications_active, 'Notifications', ()=>Navigator.pushReplacementNamed(context, PageRoutes.notification)),
-         // NavigationDrawerItem(Icons.contact_phone, 'Contact', ()=>Navigator.pushReplacementNamed(context, PageRoutes.contact)),
+          NavigationDrawerItem(Icons.share, 'Share', (){}),
+          NavigationDrawerItem(Icons.feedback, 'Complain', () {}),
+          NavigationDrawerItem(Icons.info, 'About', () {}),
+          Divider(),
+          NavigationDrawerItem(Icons.logout, 'Logout', () {}),
         ],
       ),
     );

@@ -2,7 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:room_sharing/constraints/strings.dart';
 import 'package:room_sharing/screens/HomeScreen.dart';
-import 'package:room_sharing/screens/MyPostsScreen.dart';
+import 'package:room_sharing/screens/myPost/MyPostsScreen.dart';
 import 'package:room_sharing/screens/createPostScreen.dart';
 import 'package:room_sharing/screens/login.dart';
 import 'package:room_sharing/services/pageRoute.dart';

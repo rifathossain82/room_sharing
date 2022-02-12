@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:room_sharing/constraints/colors.dart';
@@ -149,11 +150,11 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.network(
-                post.img1,
+              CachedNetworkImage(
                 width: size.width,
                 height: size.height * 0.3,
                 fit: BoxFit.cover,
+                imageUrl: post.img1,
               ),
               Padding(
                 padding: EdgeInsets.all(8),

@@ -1,7 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:room_sharing/constraints/colors.dart';
-import 'package:room_sharing/screens/ProfileScreen.dart';
+import 'package:room_sharing/screens/profileScreen/ProfileScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
@@ -62,7 +63,7 @@ class _NavigationDrawerHeaderState extends State<NavigationDrawerHeader> {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             profilePicUrl.isEmpty?
-                Center():
+                Center(child: Icon(Icons.account_circle,color: Colors.white,size: size.width/4,)):
             InkWell(
               onTap: (){
                 Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileScreen()));
@@ -73,7 +74,7 @@ class _NavigationDrawerHeaderState extends State<NavigationDrawerHeader> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(100),
                   image: DecorationImage(
-                    image: NetworkImage(profilePicUrl),
+                    image: CachedNetworkImageProvider(profilePicUrl,),
                     fit: BoxFit.cover,
                     alignment: Alignment.center,
                   )
