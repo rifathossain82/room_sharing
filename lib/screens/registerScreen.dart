@@ -8,7 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:room_sharing/constraints/colors.dart';
-import 'package:room_sharing/screens/HomeScreen.dart';
+import 'package:room_sharing/screens/home/HomeScreen.dart';
 import 'package:room_sharing/services/showMessage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -42,6 +42,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   int currentStep = 0;
   bool isCompleted = false;
+  bool obscureValue1=true;
+  bool obscureValue2=true;
 
   File? _profileImg;
   File? _image;
@@ -138,7 +140,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   setState(() {
                     isCompleted = true;
                   });
-                  addUser(context); //to add user in firebase firestore
+                  checkPhone(context); //to add unique user in firebase fireStore
                 }
               } else {
                 if(currentStep==0){
@@ -254,6 +256,49 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
+  //at first check phone, email and nid is it unique or not. if unique then add user in firebase fireStore
+  void checkPhone(BuildContext context) async {
+    FirebaseFirestore.instance
+        .collection('user')
+        .where('phone', isEqualTo: phoneController.text)
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      if (querySnapshot.docs.isEmpty) {
+        checkEmail(context);
+      } else {
+        showMessage('Phone Number already exists!');
+      }
+    });
+  }
+
+  void checkEmail(BuildContext context) async {
+    FirebaseFirestore.instance
+        .collection('user')
+        .where('email', isEqualTo: emailController.text)
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      if (querySnapshot.docs.isEmpty) {
+        checkNid(context);
+      } else {
+        showMessage('Email already exists!');
+      }
+    });
+  }
+
+  void checkNid(BuildContext context) async {
+    FirebaseFirestore.instance
+        .collection('user')
+        .where('nidNumber', isEqualTo: nidNumberController.text)
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      if (querySnapshot.docs.isEmpty) {
+        addUser(context);
+      } else {
+        showMessage('Nid Number already exists!');
+      }
+    });
+  }
+
   void addUser(BuildContext context) async {
     try {
       saveEmail(emailController.text);
@@ -296,6 +341,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           'phone': phoneController.text,
           'email': emailController.text,
           'address': addressController.text,
+          'nidNumber': nidNumberController.text,
           'nid1': urlNid1,
           'nid2': urlNid2,
           'password': passController.text,
@@ -540,7 +586,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 if (value!.isEmpty) {
                   return 'Nid Number required!';
                 }
-                else if (value.length<13) {
+                else if (!(value.length==13) && !(value.length==17)) {
                   return 'Incorrect Nid Number!';
                 }
                 else {
@@ -657,12 +703,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
               },
               controller: passController,
               maxLines: 1,
-              obscureText: true,
+              obscureText: obscureValue1,
               decoration: InputDecoration(
                   labelText: "Password",
                   suffixIcon: IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.visibility_off),
+                    onPressed: () {
+                      setState(() {
+                        obscureValue1=!obscureValue1;
+                      });
+                    },
+                      icon: Icon(obscureValue1?Icons.visibility_off:Icons.visibility),
                   )),
             ),
           ),
@@ -688,12 +738,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
               },
               controller: confirmPassController,
               maxLines: 1,
-              obscureText: true,
+              obscureText: obscureValue2,
               decoration: InputDecoration(
                   labelText: "Confirm Password",
                   suffixIcon: IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.visibility_off),
+                    onPressed: () {
+                      setState(() {
+                        obscureValue2=!obscureValue2;
+                      });
+                    },
+                      icon: Icon(obscureValue2?Icons.visibility_off:Icons.visibility),
                   )),
             ),
           ),

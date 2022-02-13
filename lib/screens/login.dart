@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:room_sharing/constraints/colors.dart';
-import 'package:room_sharing/screens/HomeScreen.dart';
+import 'package:room_sharing/screens/forgetPassword.dart';
+import 'package:room_sharing/screens/home/HomeScreen.dart';
 import 'package:room_sharing/screens/registerScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -100,12 +101,17 @@ class _LoginScreenState extends State<LoginScreen> {
                           }, icon: Icon(obscureValue?Icons.visibility_off:Icons.visibility))),
                 ),
               ),
-              Container(
-                alignment: Alignment.centerRight,
-                margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
-                child: Text(
-                  "Forgot your password?",
-                  style: TextStyle(fontSize: 12, color: color1),
+              InkWell(
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>ForgetPasswordScreen()));
+                },
+                child: Container(
+                  alignment: Alignment.centerRight,
+                  margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+                  child: Text(
+                    "Forgot your password?",
+                    style: TextStyle(fontSize: 12, color: color1),
+                  ),
                 ),
               ),
               SizedBox(height: size.height * 0.05),
@@ -193,7 +199,7 @@ class _LoginScreenState extends State<LoginScreen> {
         print('password is not matching');
         showMessage('Password is not matching!');
       } else {
-        saveEmail(emailController.text);
+        saveEmail(emailController.text,passController.text);
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => HomeScreen()));
         print('Login success');
@@ -204,8 +210,9 @@ class _LoginScreenState extends State<LoginScreen> {
     });
   }
 
-  saveEmail(String email) async {
+  saveEmail(String email,String pass) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     sharedPreferences.setString('email', email);
+    sharedPreferences.setString('pass', pass);
   }
 }

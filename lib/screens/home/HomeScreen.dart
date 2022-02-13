@@ -3,14 +3,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:room_sharing/constraints/colors.dart';
 import 'package:room_sharing/constraints/strings.dart';
-import 'package:room_sharing/screens/DetailsScreen.dart';
+import 'package:room_sharing/screens/home/DetailsScreen.dart';
 import 'package:room_sharing/services/post.dart';
 import 'package:room_sharing/widgets/appbar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../services/call_email.dart';
-import '../widgets/navigationDrawer/navigationDrawer.dart';
+import '../../services/call_email.dart';
+import '../../widgets/navigationDrawer/navigationDrawer.dart';
 
 class HomeScreen extends StatefulWidget {
   // ignore: prefer_const_constructors_in_immutables

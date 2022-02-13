@@ -9,7 +9,7 @@ import '../../constraints/colors.dart';
 import '../../services/call_email.dart';
 import '../../services/post.dart';
 import '../../widgets/navigationDrawer/navigationDrawer.dart';
-import '../DetailsScreen.dart';
+import '../home/DetailsScreen.dart';
 
 class MyPostsScreen extends StatefulWidget {
   const MyPostsScreen({Key? key}) : super(key: key);

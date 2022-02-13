@@ -1,5 +1,5 @@
 
-import 'package:room_sharing/screens/HomeScreen.dart';
+import 'package:room_sharing/screens/home/HomeScreen.dart';
 import 'package:room_sharing/screens/myPost/MyPostsScreen.dart';
 import 'package:room_sharing/screens/createPostScreen.dart';
 

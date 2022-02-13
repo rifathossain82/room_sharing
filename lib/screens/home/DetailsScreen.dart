@@ -7,9 +7,9 @@ import 'package:room_sharing/services/post.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../constraints/colors.dart';
-import '../services/call_email.dart';
-import '../widgets/appbar.dart';
+import '../../constraints/colors.dart';
+import '../../services/call_email.dart';
+import '../../widgets/appbar.dart';
 
 class DetailsScreen extends StatefulWidget {
   Post post;
