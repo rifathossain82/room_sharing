@@ -27,7 +27,7 @@ class AboutScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Image.asset('assets/images/main.png',height: 60,width: 60,fit: BoxFit.cover,),
+                  Image.asset('assets/images/logo_.png',height: 70,width: 70,fit: BoxFit.fitWidth,),
                   SizedBox(height: 8,),
                   Text('Room Sharing',style: TextStyle(fontSize: 22,fontWeight: FontWeight.w700),),
                   Text('Version 1.1.0',style: TextStyle(fontSize: 12,fontWeight: FontWeight.w400),),

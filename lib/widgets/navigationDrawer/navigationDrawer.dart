@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:room_sharing/screens/aboutScreen.dart';
 import 'package:room_sharing/screens/login.dart';
 import 'package:share/share.dart';
@@ -10,8 +12,31 @@ import 'navigationDrawerIte,.dart';
 import 'navigationHeader.dart';
 
 
-class NavigationDrawer extends StatelessWidget {
+class NavigationDrawer extends StatefulWidget {
   NavigationDrawer({Key? key}) : super(key: key);
+
+  @override
+  State<NavigationDrawer> createState() => _NavigationDrawerState();
+}
+
+class _NavigationDrawerState extends State<NavigationDrawer> {
+
+  late SharedPreferences sharedPreferences;
+  String email = '';
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getUserData();
+  }
+
+  void getUserData() async {
+    sharedPreferences = await SharedPreferences.getInstance();
+    setState(() {
+      email = sharedPreferences.getString('email')!;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +51,18 @@ class NavigationDrawer extends StatelessWidget {
           NavigationDrawerItem(Icons.post_add, 'Create a Post', ()=>Navigator.pushReplacementNamed(context, PageRoutes.createPost)),
           NavigationDrawerItem(Icons.featured_play_list, 'My Post', ()=>Navigator.pushReplacementNamed(context, PageRoutes.myPost)),
           Divider(),
+          email=='rh@gmail.com'?Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(left: 20),
+                child: Text('Admin Panel',style: TextStyle(fontSize: 16,color: Colors.black54),),
+              ),
+              NavigationDrawerItem(Icons.supervised_user_circle_rounded, 'Users', ()=>Navigator.pushReplacementNamed(context, PageRoutes.users)),
+              Divider(),
+            ],
+          ):Center(),
           NavigationDrawerItem(Icons.share, 'Share', (){
             Share.share('https://play.google.com/store/apps/details?id=com.example.room_sharing',subject: 'Share this app with your friends.');
           }),
@@ -47,7 +84,6 @@ class NavigationDrawer extends StatelessWidget {
     sharedPreferences.setString('pass', '');
   }
 
-
   //to send gmail
   final Uri emailLaunchUri = Uri(
     scheme: 'mailto',
@@ -56,7 +92,6 @@ class NavigationDrawer extends StatelessWidget {
       'subject': 'Face a issue in Room Sharing'
     }),
   );
-
 }
 
 

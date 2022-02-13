@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
@@ -118,7 +119,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           child: CircleAvatar(
                             radius: 100,
                             backgroundColor: Colors.white,
-                            backgroundImage: NetworkImage(
+                            backgroundImage: CachedNetworkImageProvider(
                               profilePicUrl,
                             ),
                           ),
@@ -219,6 +220,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   //password section
                   InkWell(
                     onTap: (){
+                      //to check user
                       Alert(
                           context: context,
                           title: "LOGIN",
@@ -264,14 +266,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   decoration: InputDecoration(
                                     icon: Icon(Icons.lock),
                                     labelText: 'Password',
-                                    suffixIcon: IconButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          loginObscureValue=!loginObscureValue;
-                                        });
-                                      },
-                                      icon: loginObscureValue?Icon(Icons.visibility_off):Icon(Icons.visibility),
-                                  ),
                                 ),
                                 ),
                               ],
@@ -301,7 +295,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                             )
                           ]).show();
-                     //
                     },
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -324,110 +317,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
     );
   }
-
-  /*
-  Stack(
-            alignment: Alignment.center,
-            overflow: Overflow.visible,
-            clipBehavior: Clip.none,
-            children: [
-              Container(
-                  height: size.height/3,
-                  width: size.width,
-                  decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                          colors: [
-                            Colors.purple,
-                            Colors.red
-                          ],
-                          begin: Alignment.bottomRight,
-                          end: Alignment.topLeft
-                      )
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: size.height/15,horizontal: 16),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        InkWell(
-                            onTap: (){
-                              Navigator.pop(context);
-                            },
-                            child: Icon(Icons.arrow_back,color: Colors.white,)
-                        ),
-                        SizedBox(width: 16,),
-                        Text('Profile Page',style: TextStyle(color: Colors.white,fontSize: 18),)
-                      ],
-                    ),
-                  )
-              ),
-              Positioned(
-                  bottom: -size.height/8,
-                  child: Stack(
-                    alignment: Alignment.bottomRight,
-                    children: [
-                      Stack(
-                          children:[
-                            Container(
-                                height: size.height/4,
-                                width: size.height/4,
-                                decoration: BoxDecoration(
-                                    borderRadius:
-                                    BorderRadius.circular(100),
-                                    border: Border.all(
-                                        width: 5, color: Colors.white)),
-                                child: ClipOval(
-                                  child: ShaderMask(
-                                    shaderCallback: (bounds) =>
-                                        LinearGradient(
-                                            colors: [
-                                              Colors.black38.withOpacity(0.2),
-                                              Colors.black87.withOpacity(0.8)
-                                            ],
-                                            begin: Alignment.center,
-                                            end: Alignment.bottomCenter)
-                                            .createShader(bounds),
-                                    blendMode: BlendMode.darken,
-                                    child: CircleAvatar(
-                                      radius: 100,
-                                      backgroundColor: Colors.white,
-                                      backgroundImage: NetworkImage(
-                                        profilePicUrl,
-                                      ),
-                                    ),
-                                  ),
-                                )),
-                            Positioned(
-                              left: 78,
-                              bottom: 20,
-                              child: Icon(
-                                Icons.security_rounded,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ]),
-                      Positioned(
-                        child: Container(
-                            height: 40,
-                            width: 40,
-                            decoration: BoxDecoration(
-                                color:
-                                Colors.white70.withOpacity(0.5),
-                                borderRadius:
-                                BorderRadius.circular(100)),
-                            child: IconButton(
-                              icon: Icon(Icons.camera_alt),
-                              onPressed: (){
-                                print('hi');
-                              },
-                            )),
-                      )
-                    ],
-                  ))
-            ],
-          ),
-   */
 
   void uploadImage()async {
     final fileName0 = basename(profileFile!.path);
@@ -474,6 +363,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       print('Faild to pick image: $e');
     }
   }
+
   Future<File> saveImagePermanently(String imagePath) async {
     final directory = await getApplicationDocumentsDirectory();
     final name = basename(imagePath);

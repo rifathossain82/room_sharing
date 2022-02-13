@@ -97,10 +97,13 @@ class _HomeScreenState extends State<HomeScreen> {
             if (snapshot.hasError) return Text('Error: ${snapshot.error}');
             switch (snapshot.connectionState) {
               case ConnectionState.waiting:
-                return new Text('Loading...');
+                return Center(child: CircularProgressIndicator());
               default:
                 post_list = [];
-                return ListView(
+                return snapshot.data!.docs.isEmpty?
+                Center(child: Text('No Posts Yet!',style: TextStyle(fontSize: 20,fontWeight: FontWeight.w400),),)
+                    :
+                ListView(
                   children: snapshot.data!.docs.map((DocumentSnapshot data) {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),

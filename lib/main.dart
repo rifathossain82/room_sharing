@@ -5,9 +5,9 @@ import 'package:room_sharing/constraints/strings.dart';
 import 'package:room_sharing/screens/home/HomeScreen.dart';
 import 'package:room_sharing/screens/myPost/MyPostsScreen.dart';
 import 'package:room_sharing/screens/createPostScreen.dart';
-import 'package:room_sharing/screens/login.dart';
+import 'package:room_sharing/screens/splashScreen.dart';
+import 'package:room_sharing/screens/users/usersScreen.dart';
 import 'package:room_sharing/services/pageRoute.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,39 +25,26 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
 
-  late SharedPreferences sharedPreferences;
-  String email = '';
-  String password = '';
-
-  @override
-  void initState() {
-    super.initState();
-    getEmail();
-  }
-
-  void getEmail() async {
-    sharedPreferences = await SharedPreferences.getInstance();
-    setState(() {
-      email = sharedPreferences.getString('email')!;
-      password = sharedPreferences.getString('pass')!;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return OverlaySupport.global(
       child: MaterialApp(
         title: app_name,
         debugShowCheckedModeBanner: false,
-        home: email.isEmpty?LoginScreen():HomeScreen(),
+        home: SplashScreen(),
         theme: ThemeData(primarySwatch: Colors.purple,primaryColor: Colors.purple),
         routes: {
           PageRoutes.home:(context)=> HomeScreen(),
           PageRoutes.createPost:(context)=> CreatePostScreen(),
           PageRoutes.myPost:(context)=> MyPostsScreen(),
+          PageRoutes.users:(context)=> UsersScreen(),
         },
       ),
     );
 
   }
 }
+
+//room sharing app start from this main.dart page
+//overlaySupport.global use to show message when I sent email
+//pageRoutes for navigation drawer items, when I click any item of navigation drawer then I call the item page

@@ -25,7 +25,6 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Background(
@@ -192,6 +191,7 @@ class _LoginScreenState extends State<LoginScreen> {
   void passwordCheck(BuildContext context) async {
     FirebaseFirestore.instance
         .collection('user')
+        .where('email', isEqualTo: emailController.text)
         .where('password', isEqualTo: passController.text)
         .get()
         .then((QuerySnapshot querySnapshot) {

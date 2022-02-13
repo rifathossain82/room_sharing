@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:path/path.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -67,7 +66,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     }
   }
 
-  Future galleryImage() async {
+  Future cameraImage() async {
     try {
       final image = await ImagePicker().pickImage(source: ImageSource.camera);
       if (image == null) return;
@@ -85,7 +84,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     }
   }
 
-  Future galleryImage2() async {
+  Future cameraImage2() async {
     try {
       final image = await ImagePicker().pickImage(source: ImageSource.camera);
       if (image == null) return;
@@ -606,7 +605,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           SizedBox(height: 16,),
           InkWell(
               onTap: () {
-                galleryImage();
+                cameraImage();
               },
               child: Container(
                   height: 80,
@@ -643,7 +642,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ),
           InkWell(
             onTap: () {
-              galleryImage2();
+              cameraImage2();
             },
             child: Container(
                 height: 80,

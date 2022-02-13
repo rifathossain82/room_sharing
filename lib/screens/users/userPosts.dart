@@ -1,58 +1,37 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:room_sharing/screens/myPost/MyPostDetailsScreen.dart';
+import 'package:room_sharing/screens/users/userPostDetails.dart';
 import 'package:room_sharing/widgets/appbar.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../constraints/colors.dart';
-import '../../services/call_email.dart';
 import '../../services/post.dart';
-import '../../widgets/navigationDrawer/navigationDrawer.dart';
-import '../home/DetailsScreen.dart';
 
-class MyPostsScreen extends StatefulWidget {
-  const MyPostsScreen({Key? key}) : super(key: key);
-
-  static const String routeName='/MyPost';
+class UserPosts extends StatefulWidget {
+  var id;
+  UserPosts({Key? key,required this.id}) : super(key: key);
 
   @override
-  State<MyPostsScreen> createState() => _MyPostsScreenState();
+  _UserPostsState createState() => _UserPostsState();
 }
 
-class _MyPostsScreenState extends State<MyPostsScreen> {
+class _UserPostsState extends State<UserPosts> {
 
-  CollectionReference post = FirebaseFirestore.instance.collection('post');
-  TextEditingController searchController = TextEditingController();
-  late SharedPreferences sharedPreferences;
-  String email = '';
   List<Post> post_list = [];
-  var post_id;
-
-  @override
-  void initState() {
-    super.initState();
-    getEmail();
-  }
-
-  void getEmail() async {
-    sharedPreferences = await SharedPreferences.getInstance();
-    setState(() {
-      email = sharedPreferences.getString('email')!;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('My Posts'),
+        title: Text('User Posts'),
         elevation: 0,
         flexibleSpace: MyAppBar(),
       ),
       body: StreamBuilder<QuerySnapshot>(
-          stream: FirebaseFirestore.instance.collection('post').where('email',isEqualTo: email).snapshots(),
+          stream: FirebaseFirestore.instance
+              .collection('post')
+              .where('email', isEqualTo: widget.id['email'])
+              .snapshots(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasError) return Text('Error: ${snapshot.error}');
@@ -66,7 +45,6 @@ class _MyPostsScreenState extends State<MyPostsScreen> {
                     :
                 ListView(
                   children: snapshot.data!.docs.map((DocumentSnapshot data) {
-                    post_id=data;
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: buildPost(
@@ -85,17 +63,17 @@ class _MyPostsScreenState extends State<MyPostsScreen> {
                               data['img3'],
                               data['img4'],
                               data['img5']),
+                          data,
                           context),
                     );
                   }).toList(),
                 );
             }
           }),
-      drawer: NavigationDrawer(),
     );
   }
 
-  Widget buildPost(Post post, BuildContext context) {
+  Widget buildPost(Post post,var id, BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Card(
       elevation: 2,
@@ -105,7 +83,7 @@ class _MyPostsScreenState extends State<MyPostsScreen> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => MyPostDetailsScreen(post: post,id: post_id,)));
+                  builder: (context) => UserPostDetails(id: id,)));
         },
         child: Container(
           decoration: BoxDecoration(
@@ -116,10 +94,10 @@ class _MyPostsScreenState extends State<MyPostsScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CachedNetworkImage(
-                imageUrl: post.img1,
                 width: size.width,
                 height: size.height * 0.3,
                 fit: BoxFit.cover,
+                imageUrl: post.img1,
               ),
               Padding(
                 padding: EdgeInsets.all(8),
