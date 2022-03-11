@@ -5,7 +5,7 @@ import 'package:room_sharing/screens/users/userPostDetails.dart';
 import 'package:room_sharing/widgets/appbar.dart';
 
 import '../../constraints/colors.dart';
-import '../../services/post.dart';
+import '../../model/post.dart';
 
 class UserPosts extends StatefulWidget {
   var id;
@@ -49,6 +49,7 @@ class _UserPostsState extends State<UserPosts> {
                       padding: const EdgeInsets.all(8.0),
                       child: buildPost(
                           Post(
+                              data.id,
                               data['email'],
                               data['date'],
                               data['time'],

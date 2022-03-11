@@ -1,4 +1,5 @@
 class Post{
+  var id;
   String email;
   String date;
   String time;
@@ -15,6 +16,7 @@ class Post{
   String img5;
 
   Post(
+      this.id,
       this.email,
       this.date,
       this.time,

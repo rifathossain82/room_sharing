@@ -4,10 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:room_sharing/constraints/colors.dart';
 import 'package:room_sharing/constraints/strings.dart';
 import 'package:room_sharing/screens/home/DetailsScreen.dart';
-import 'package:room_sharing/services/post.dart';
+import 'package:room_sharing/model/post.dart';
 import 'package:room_sharing/widgets/appbar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../services/call_email.dart';
 import '../../widgets/navigationDrawer/navigationDrawer.dart';
@@ -72,15 +71,19 @@ class _HomeScreenState extends State<HomeScreen> {
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5),
                       borderSide:
-                          BorderSide(color: Colors.transparent, width: 0)),
+                          BorderSide(color: Colors.transparent, width: 0)
+                  ),
                   enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5),
                       borderSide:
-                          BorderSide(color: Colors.transparent, width: 0)),
+                          BorderSide(color: Colors.transparent, width: 0)
+                  ),
                   focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5),
                       borderSide:
-                          BorderSide(color: Colors.transparent, width: 0))),
+                          BorderSide(color: Colors.transparent, width: 0)
+                  )
+              ),
             ),
           ),
         ),
@@ -109,6 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       padding: const EdgeInsets.all(8.0),
                       child: buildPost(
                           Post(
+                              data.id,
                               data['email'],
                               data['date'],
                               data['time'],
@@ -123,7 +127,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               data['img3'],
                               data['img4'],
                               data['img5']),
-                          context),
+                          context
+                      ),
                     );
                   }).toList(),
                 );
@@ -143,7 +148,9 @@ class _HomeScreenState extends State<HomeScreen> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => DetailsScreen(post: post)));
+                  builder: (context) => DetailsScreen(post: post)
+              )
+          );
         },
         child: Container(
           decoration: BoxDecoration(
@@ -246,7 +253,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(
-                              Icons.phone,
+                              Icons.email,
                               color: Colors.white,
                             ),
                             SizedBox(
@@ -267,8 +274,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
               SizedBox(
-                height: 8,
+                height: 16,
               ),
+
             ],
           ),
         ),

@@ -5,7 +5,7 @@ import 'package:room_sharing/constraints/strings.dart';
 import 'package:room_sharing/screens/home/HomeScreen.dart';
 import 'package:room_sharing/screens/myPost/MyPostsScreen.dart';
 import 'package:room_sharing/screens/createPostScreen.dart';
-import 'package:room_sharing/screens/splashScreen.dart';
+import 'package:room_sharing/screens/splashScreen/splashScreen.dart';
 import 'package:room_sharing/screens/users/usersScreen.dart';
 import 'package:room_sharing/services/pageRoute.dart';
 

@@ -8,7 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../constraints/colors.dart';
 import '../../services/call_email.dart';
-import '../../services/post.dart';
+import '../../model/post.dart';
 import '../../widgets/navigationDrawer/navigationDrawer.dart';
 import '../home/DetailsScreen.dart';
 
@@ -71,6 +71,7 @@ class _MyPostsScreenState extends State<MyPostsScreen> {
                       padding: const EdgeInsets.all(8.0),
                       child: buildPost(
                           Post(
+                              data.id,
                               data['email'],
                               data['date'],
                               data['time'],

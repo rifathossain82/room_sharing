@@ -1,11 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:room_sharing/services/post.dart';
+import 'package:room_sharing/model/post.dart';
+import 'package:room_sharing/services/showMessage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../constraints/colors.dart';
 import '../../services/call_email.dart';
@@ -21,16 +21,48 @@ class DetailsScreen extends StatefulWidget {
 
 var activeIndex=0;
 CarouselController controller=CarouselController();
+TextEditingController commentController=TextEditingController();  //to control comment edit text
 
 List<String> images=[];
 var authorName='';
 var authorImg='';
 
+//user who use this app now
+late SharedPreferences sharedPreferences;
+String userEmail = '';
+String userName = '';
+var userImage='';
+
+//for post comments
+CollectionReference comments =
+FirebaseFirestore.instance.collection('comments');
+
 class _DetailsScreenState extends State<DetailsScreen> {
+
+  @override
+  void initState() {
+    super.initState();
+    getEmail();
+  }
+
+  void getEmail() async {
+    sharedPreferences = await SharedPreferences.getInstance();
+    setState(() {
+      userEmail = sharedPreferences.getString('email')!;
+    });
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    commentController.clear();
+  }
 
   @override
   Widget build(BuildContext context) {
     findAuthor();
+    findUser();
     return Scaffold(
       appBar: AppBar(
         title: Text('Room Sharing'),
@@ -170,7 +202,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(Icons.phone,color: Colors.white,),
+                              Icon(Icons.email,color: Colors.white,),
                               SizedBox(width: 5,),
                               Text('EMAIL',style: TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.w500),),
                             ],
@@ -180,10 +212,79 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     ),
                   ],
                 ),
-                SizedBox(height: 8,),
+                SizedBox(height: 40,),
+
+                Text('Comments',style: TextStyle(fontSize: 14,fontWeight: FontWeight.w700),),
+                Divider(),
+
+                //add a comment section
+                Row(
+                  children: [
+                    Container(
+                      height: 40,
+                      width: 40,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          image: DecorationImage(
+                            image: CachedNetworkImageProvider(userImage),
+                            fit: BoxFit.cover,
+                            alignment: Alignment.center,
+                          )
+                      ),
+                    ),
+                    SizedBox(width: 16,),
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          TextField(
+                            controller: commentController,
+                            decoration: InputDecoration(
+                              hintText: 'Add a comment',
+                            ),
+                          ),
+                          commentController.text.isNotEmpty?
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              TextButton(
+                                  onPressed: (){
+                                    setState(() {
+                                      commentController.clear();
+                                    });
+                                  },
+                                  child: Text('CANCEL')
+                              ),
+                              TextButton(
+                                  onPressed: (){
+                                    setState(() {
+                                      createComment();
+                                      commentController.clear();
+                                    });
+                                  },
+                                  child: Text('COMMENT')
+                              ),
+                            ],
+                          )
+                              :
+                          Center(),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 20,),
               ],
             ),
-          )
+          ),
+
+          //show all comments
+          SizedBox(
+              height: 200,
+              width: MediaQuery.of(context).size.width,
+              child: showComments()
+          ),
         ],
       ),
     );
@@ -285,4 +386,60 @@ class _DetailsScreenState extends State<DetailsScreen> {
        });
     });
   }
+
+  void findUser(){
+    FirebaseFirestore.instance
+        .collection('user')
+        .where('email', isEqualTo: userEmail)
+        .get()
+        .then((QuerySnapshot querySnapshot) async {
+      var f_name=querySnapshot.docs[0]['firstName'];
+      var l_name=querySnapshot.docs[0]['lastName'];
+      userImage=querySnapshot.docs[0]['profilePic'];
+      setState(() {
+        userName=f_name+" "+l_name;
+      });
+    });
+  }
+
+  void createComment(){
+    comments.add({
+      'postid': widget.post.id,
+      'image': userImage,
+      'name': userName,
+      'comment': commentController.text,
+    }).then((value){
+      showMessage('Comment submit Successfully.');
+    })
+        .onError((error, stackTrace){
+      showMessage('Comment submit Failed.');
+    });
+  }
+
+  Widget showComments(){
+    return StreamBuilder<QuerySnapshot>(
+        stream: FirebaseFirestore.instance
+            .collection('comments')
+            .where('postid', isEqualTo: widget.post.id)
+            .snapshots(),
+        builder:
+            (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+              if(!snapshot.hasData) {
+                return Center(child: Text('No Comments Yet!', style: TextStyle(
+                    fontSize: 20, fontWeight: FontWeight.w400),),);
+              }
+              else{
+                return ListView(
+                  children: snapshot.data!.docs.map((DocumentSnapshot data) {
+                    return ListTile(
+                      leading: CircleAvatar(backgroundImage: CachedNetworkImageProvider(data['image'])),
+                      title: Text(data['name']),
+                      subtitle: Text(data['comment']),
+                    );
+                  }).toList(),
+                );
+              }
+        });
+  }
+
 }
