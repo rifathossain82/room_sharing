@@ -289,7 +289,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
           ),
 
           ///district dropdown here
-          selectedDivision==divisionList[0]?
+          selectedDistrict=='' || selectedDistrict==null || selectedDivision==divisionList[0]?
           Center()
           :
           Row(
@@ -301,7 +301,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
           ),
 
           ///upazila dropdown here
-          selectedDistrict==null || selectedDistrict==districtList[0]?
+          selectedDistrict=='' || selectedDistrict==null || selectedDistrict==districtList[0]?
           Center()
               :
           Row(
