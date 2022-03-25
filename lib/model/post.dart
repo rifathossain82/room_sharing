@@ -5,6 +5,9 @@ class Post{
   String time;
   String title;
   String des;
+  String division;
+  String district;
+  String upazila;
   String location;
   String price;
   String food_status;
@@ -22,6 +25,9 @@ class Post{
       this.time,
       this.title,
       this.des,
+      this.division,
+      this.district,
+      this.upazila,
       this.location,
       this.price,
       this.food_status,

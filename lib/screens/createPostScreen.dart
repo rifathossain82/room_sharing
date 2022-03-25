@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -7,9 +8,11 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:room_sharing/constraints/colors.dart';
+import 'package:room_sharing/constraints/strings.dart';
 import 'package:room_sharing/services/firebaseApi.dart';
 import 'package:room_sharing/services/showMessage.dart';
 import 'package:room_sharing/widgets/appbar.dart';
+import 'package:room_sharing/widgets/myDropDown.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../widgets/navigationDrawer/navigationDrawer.dart';
 
@@ -28,6 +31,13 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
   TextEditingController locationController = TextEditingController();
   TextEditingController priceController = TextEditingController();
   TextEditingController foodPriceController = TextEditingController();
+
+  var selectedDivision=divisionList[0];
+  var selectedDistrict;
+  var selectedUpazila;
+
+  List<String> districtList=dhakaDistrictList;
+  List<String> upazilaList=BargunaUpazilaList;
 
   final formKey1 = GlobalKey<FormState>();
   final formKey2 = GlobalKey<FormState>();
@@ -82,7 +92,8 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                 isCompleted = true;
               });
               addPost(context);     //to add user in firebase firestore
-            } else {
+            }
+            else {
               if(currentStep==0){
                 if(formKey1.currentState!.validate()){
                   setState(() {
@@ -91,14 +102,25 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                 }
               }
               else if(currentStep==1){
-                if(formKey2.currentState!.validate()){
-                  if(selectedRadio==0){
-                    showMessage('Select any food option.');
-                  }
-                  else{
-                    setState(() {
-                      currentStep += 1;
-                    });
+                if(selectedDivision.toString().contains('Select Division')){
+                  showMessage('Please Select Division');
+                }
+                else if(selectedDistrict.toString().contains('Select District')){
+                  showMessage('Please Select District');
+                }
+                else if(selectedUpazila.toString().contains('Select Upazila')){
+                  showMessage('Please Select Upazila');
+                }
+                else{
+                  if(formKey2.currentState!.validate()){
+                    if(selectedRadio==0){
+                      showMessage('Select any food option.');
+                    }
+                    else{
+                      setState(() {
+                        currentStep += 1;
+                      });
+                    }
                   }
                 }
               }
@@ -256,6 +278,43 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+
+          ///division dropdown here
+          Row(
+            children: [
+              Text('Division', style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500),),
+              Spacer(),
+              divisionDropDown(),
+            ],
+          ),
+
+          ///district dropdown here
+          selectedDivision==divisionList[0]?
+          Center()
+          :
+          Row(
+            children: [
+              Text('District', style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500),),
+              Spacer(),
+              districtDropDown(),
+            ],
+          ),
+
+          ///upazila dropdown here
+          selectedDistrict==null || selectedDistrict==districtList[0]?
+          Center()
+              :
+          Row(
+            children: [
+              Text('Upazila', style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500),),
+              Spacer(),
+              upazilaDropDown(),
+            ],
+          ),
+
+          SizedBox(
+            height: 8,
+          ),
           Container(
             alignment: Alignment.center,
             child: TextFormField(
@@ -271,8 +330,8 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
               maxLines: 1,
               keyboardType: TextInputType.text,
               decoration: InputDecoration(
-                  labelText: "Location",
-                  hintText: 'Uttara, Dhaka'),
+                  labelText: "Home Address",
+                  hintText: 'House No. 53, Road No. 5, Uttara'),
             ),
           ),
           SizedBox(
@@ -332,8 +391,8 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
           SizedBox(
             height: 16,
           ),
-          selectedRadio == 1
-              ? Container(
+          selectedRadio == 1?
+          Container(
                   alignment: Alignment.center,
                   child: TextFormField(
                     validator: (value){
@@ -354,7 +413,8 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                         labelText: "Food Price (Per Day)", prefix: Text('TK: ')),
                   ),
                 )
-              : Center(),
+              :
+          Center(),
         ],
       ),
     );
@@ -415,6 +475,35 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
 
       ],
     );
+  }
+
+  Widget divisionDropDown(){
+    return myDropDown(divisionList, selectedDivision, 'Select Division', (val){
+      districtList.clear();
+      setState(() {
+        selectedDivision=val;
+      });
+      changeDistrictList();
+
+    });
+  }
+
+  Widget districtDropDown(){
+    return myDropDown(districtList, selectedDistrict, 'Select District', (val){
+      upazilaList.clear();
+      setState(() {
+        selectedDistrict=val;
+      });
+      changeUpazilaList();
+    });
+  }
+
+  Widget upazilaDropDown(){
+    return myDropDown(upazilaList, selectedUpazila, 'Select Upazila', (val){
+      setState(() {
+        selectedUpazila=val;
+      });
+    });
   }
 
   void selectImage() async {
@@ -550,6 +639,9 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
           'time': time,
           'title': titleController.text,
           'description': desController.text,
+          'division': selectedDivision,
+          'district': selectedDistrict,
+          'upazila': selectedUpazila,
           'location': locationController.text,
           'price': priceController.text,
           'food': food_status,
@@ -588,5 +680,256 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
     catch(e){
       showMessage('Failed!!');
     }
+  }
+
+
+  void changeDistrictList(){
+    if(selectedDivision==divisionList[1]){
+      districtList.add('Select District');
+      districtList.add('Dhaka');
+      districtList.add('Faridpur');
+      districtList.add('Gazipur');
+      districtList.add('Gopalganj');
+      districtList.add('Kishoreganj');
+      districtList.add('Madaripur');
+      districtList.add('Manikganj');
+      districtList.add('Munshiganj');
+      districtList.add('Narayanganj');
+      districtList.add('Narshingdi');
+      districtList.add('Rajbari');
+      districtList.add('Shariatpur');
+      districtList.add('Tangail');
+    }
+    else if(selectedDivision==divisionList[2]){
+      districtList.addAll(chittagongDistrictList);
+    }
+    else if(selectedDivision==divisionList[3]){
+      districtList.addAll(khulnaDistrictList);
+    }
+    else if(selectedDivision==divisionList[4]){
+      districtList.addAll(barishalDistrictList);
+    }
+    else if(selectedDivision==divisionList[5]){
+      districtList.addAll(mymensinghDistrictList);
+    }
+    else if(selectedDivision==divisionList[6]){
+      districtList.addAll(rajshahiDistrictList);
+    }
+    else if(selectedDivision==divisionList[7]){
+      districtList.addAll(rangpurDistrictList);
+    }
+    else if(selectedDivision==divisionList[8]){
+      districtList.addAll(sylhetDistrictList);
+    }
+    else{
+      districtList.addAll(sylhetDistrictList);
+    }
+    setState(() {
+      selectedDistrict=districtList[0];
+    });
+    print(districtList);
+  }
+
+  void changeUpazilaList(){
+    switch(selectedDistrict){
+      case 'Barguna':
+        upazilaList.addAll(BargunaUpazilaList);
+        break;
+      case 'Barishal':
+        upazilaList.addAll(BarisalUpazilaList);
+        break;
+      case 'Bhola':
+        upazilaList.addAll(BholaUpazilaList);
+        break;
+      case 'Jhalokathi':
+        upazilaList.addAll(JhalokathiUpazilaList);
+        break;
+      case 'Patuakhali':
+        upazilaList.addAll(PatuakhaliUpazilaList);
+        break;
+      case 'Pirojpur':
+        upazilaList.addAll(PirojpurUpazilaList);
+        break;
+      case 'B.baria':
+        upazilaList.addAll(B_bariaUpazilaList);
+        break;
+      case 'Bandarban':
+        upazilaList.addAll(BandarbanUpazilaList);
+        break;
+      case 'Chandpur':
+        upazilaList.addAll(ChandpurUpazilaList);
+        break;
+      case 'Chattogram':
+        upazilaList.addAll(ChattogramUpazilaList);
+        break;
+      case 'Cox\'s bazar':
+        upazilaList.addAll(Cox_bazarUpazilaList);
+        break;
+      case 'Cumilla':
+        upazilaList.addAll(CumillaUpazilaList);
+        break;
+      case 'Feni':
+        upazilaList.addAll(FeniUpazilaList);
+        break;
+      case 'Khagrachari':
+        upazilaList.addAll(KhagrachariUpazilaList);
+        break;
+      case 'Laxmipur':
+        upazilaList.addAll(LaxmipurUpazilaList);
+        break;
+      case 'Noakhali':
+        upazilaList.addAll(NoakhaliUpazilaList);
+        break;
+      case 'Rangamati':
+        upazilaList.addAll(RangamatiUpazilaList);
+        break;
+      case 'Dhaka':
+        upazilaList.addAll(DhakaUpazilaList);
+        break;
+      case 'Faridpur':
+        upazilaList.addAll(FaridpurUpazilaList);
+        break;
+      case 'Gazipur':
+        upazilaList.addAll(GazipurUpazilaList);
+        break;
+      case 'Gopalganj':
+        upazilaList.addAll(GopalganjUpazilaList);
+        break;
+      case 'Kishoreganj':
+        upazilaList.addAll(KishoreganjUpazilaList);
+        break;
+      case 'Madaripur':
+        upazilaList.addAll(MadaripurUpazilaList);
+        break;
+      case 'Manikganj':
+        upazilaList.addAll(ManikganjUpazilaList);
+        break;
+      case 'Munshiganj':
+        upazilaList.addAll(MunshiganjUpazilaList);
+        break;
+      case 'Narayanganj':
+        upazilaList.addAll(NarayanganjUpazilaList);
+        break;
+      case 'Narshingdi':
+        upazilaList.addAll(NarshingdiUpazilaList);
+        break;
+      case 'Rajbari':
+        upazilaList.addAll(RajbariUpazilaList);
+        break;
+      case 'Shariatpur':
+        upazilaList.addAll(ShariatpurUpazilaList);
+        break;
+      case 'Tangail':
+        upazilaList.addAll(TangailUpazilaList);
+        break;
+      case 'Bagerhat':
+        upazilaList.addAll(BagerhatUpazilaList);
+        break;
+      case 'Chuadanga':
+        upazilaList.addAll(ChuadangaUpazilaList);
+        break;
+      case 'Jashore':
+        upazilaList.addAll(JashoreUpazilaList);
+        break;
+      case 'Jhenaidah':
+        upazilaList.addAll(JhenaidahUpazilaList);
+        break;
+      case 'Khulna':
+        upazilaList.addAll(KhulnaUpazilaList);
+        break;
+      case 'Kushtia':
+        upazilaList.addAll(KushtiaUpazilaList);
+        break;
+      case 'Magura':
+        upazilaList.addAll(MaguraUpazilaList);
+        break;
+      case 'Meherpur':
+        upazilaList.addAll(MeherpurUpazilaList);
+        break;
+      case 'Narail':
+        upazilaList.addAll(NarailUpazilaList);
+        break;
+      case 'Satkhira':
+        upazilaList.addAll(SatkhiraUpazilaList);
+        break;
+      case 'Jamalpur':
+        upazilaList.addAll(JamalpurUpazilaList);
+        break;
+      case 'Mymensingh':
+        upazilaList.addAll(MymensinghUpazilaList);
+        break;
+      case 'Netrokona':
+        upazilaList.addAll(NetrokonaUpazilaList);
+        break;
+      case 'Sherpur':
+        upazilaList.addAll(SherpurUpazilaList);
+        break;
+      case 'Bogura':
+        upazilaList.addAll(BoguraUpazilaList);
+        break;
+      case 'C. nawabganj':
+        upazilaList.addAll(CapainawabganjUpazilaList);
+        break;
+      case 'Joypurhat':
+        upazilaList.addAll(JoypurhatUpazilaList);
+        break;
+      case 'Naogaon':
+        upazilaList.addAll(NaogaonUpazilaList);
+        break;
+      case 'Natore':
+        upazilaList.addAll(NatoreUpazilaList);
+        break;
+      case 'Pabna':
+        upazilaList.addAll(PabnaUpazilaList);
+        break;
+      case 'Rajshahi':
+        upazilaList.addAll(RajshahiUpazilaList);
+        break;
+      case 'Sirajganj':
+        upazilaList.addAll(SirajganjUpazilaList);
+        break;
+      case 'Dinajpur':
+        upazilaList.addAll(DinajpurUpazilaList);
+        break;
+      case 'Gaibandha':
+        upazilaList.addAll(GaibandhaUpazilaList);
+        break;
+      case 'Kurigram':
+        upazilaList.addAll(KurigramUpazilaList);
+        break;
+      case 'Lalmonirhat':
+        upazilaList.addAll(LalmonirhatUpazilaList);
+        break;
+      case 'Nilphamari':
+        upazilaList.addAll(NilphamariUpazilaList);
+        break;
+      case 'Panchagarh':
+        upazilaList.addAll(PanchagarhUpazilaList);
+        break;
+      case 'Rangpur':
+        upazilaList.addAll(RangpurUpazilaList);
+        break;
+      case 'Thakurgaon':
+        upazilaList.addAll(ThakurgaonUpazilaList);
+        break;
+      case 'Habiganj':
+        upazilaList.addAll(HabiganjUpazilaList);
+        break;
+      case 'Moulvibazar':
+        upazilaList.addAll(MoulvibazarUpazilaList);
+        break;
+      case 'Sunamganj':
+        upazilaList.addAll(SunamganjUpazilaList);
+        break;
+      case 'Sylhet':
+        upazilaList.addAll(SylhetUpazilaList);
+        break;
+      default:
+        break;
+    }
+    setState(() {
+      selectedUpazila=upazilaList[0];
+    });
+    print(upazilaList);
   }
 }

@@ -62,7 +62,7 @@ class _MyPostsScreenState extends State<MyPostsScreen> {
               default:
                 post_list = [];
                 return snapshot.data!.docs.isEmpty?
-                Center(child: Text('No Posts Yet!',style: TextStyle(fontSize: 20,fontWeight: FontWeight.w400),),)
+                Center(child: Text('No Posts Yet!',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400, color: Colors.black54,)),)
                     :
                 ListView(
                   children: snapshot.data!.docs.map((DocumentSnapshot data) {
@@ -77,6 +77,9 @@ class _MyPostsScreenState extends State<MyPostsScreen> {
                               data['time'],
                               data['title'],
                               data['description'],
+                              data['division'],
+                              data['district'],
+                              data['upazila'],
                               data['location'],
                               data['price'],
                               data['food'],

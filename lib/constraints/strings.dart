@@ -1,17 +1,16 @@
-String app_name="Room Sharing";
-
+String app_name = "Room Sharing";
 
 //all social link of mine
-String fb_url='https://www.facebook.com/rh.rifat.33633';
-String twitter_url='https://twitter.com/Rifatho25073502';
-String instagram_url='https://www.instagram.com/rh_rifat220/';
-String linkedin_url='https://www.linkedin.com/in/rifat-hossain-66811b201/';
-String github_url='https://github.com/rifathossain82';
-String fiverr_url='https://www.fiverr.com/rifathossain82?up_rollout=true';
-String youTube_url='https://www.youtube.com/channel/UCHQjehNirRNYmWtYK0rh9jg';
+String fb_url = 'https://www.facebook.com/rh.rifat.33633';
+String twitter_url = 'https://twitter.com/Rifatho25073502';
+String instagram_url = 'https://www.instagram.com/rh_rifat220/';
+String linkedin_url = 'https://www.linkedin.com/in/rifat-hossain-66811b201/';
+String github_url = 'https://github.com/rifathossain82';
+String fiverr_url = 'https://www.fiverr.com/rifathossain82?up_rollout=true';
+String youTube_url = 'https://www.youtube.com/channel/UCHQjehNirRNYmWtYK0rh9jg';
 
-
-List<String> divisionList=[
+List<String> divisionList = [
+  'Select Division',
   'Dhaka',
   'Chattogram',
   'Khulna',
@@ -22,7 +21,8 @@ List<String> divisionList=[
   'Sylhet',
 ];
 
-List<String> barishalDistrictList=[
+List<String> barishalDistrictList = [
+  'Select District',
   'Barguna',
   'Barishal,',
   'Bhola',
@@ -31,7 +31,8 @@ List<String> barishalDistrictList=[
   'Pirojpur',
 ];
 
-List<String> chittagongDistrictList=[
+List<String> chittagongDistrictList = [
+  'Select District',
   'B.baria	',
   'Bandarban,',
   'Chandpur',
@@ -45,8 +46,8 @@ List<String> chittagongDistrictList=[
   'Rangamati',
 ];
 
-
-List<String> dhakaDistrictList=[
+List<String> dhakaDistrictList = [
+  'Select District',
   'Dhaka',
   'Faridpur,',
   'Gazipur',
@@ -59,10 +60,11 @@ List<String> dhakaDistrictList=[
   'Narshingdi',
   'Rajbari',
   'Shariatpur',
-  'Tangail',
+  'Tangail'
 ];
 
-List<String> khulnaDistrictList=[
+List<String> khulnaDistrictList = [
+  'Select District',
   'Bagerhat',
   'Chuadanga,',
   'Jashore',
@@ -75,14 +77,16 @@ List<String> khulnaDistrictList=[
   'Satkhira',
 ];
 
-List<String> mymensinghDistrictList=[
+List<String> mymensinghDistrictList = [
+  'Select District',
   'Jamalpur',
   'Mymensingh,',
   'Netrokona',
   'Sherpur',
 ];
 
-List<String> rajshahiDistrictList=[
+List<String> rajshahiDistrictList = [
+  'Select District',
   'Bogura',
   'C. nawabganj',
   'Joypurhat',
@@ -93,7 +97,8 @@ List<String> rajshahiDistrictList=[
   'Sirajganj',
 ];
 
-List<String> rangpurDistrictList=[
+List<String> rangpurDistrictList = [
+  'Select District',
   'Dinajpur',
   'Gaibandha',
   'Kurigram',
@@ -104,13 +109,15 @@ List<String> rangpurDistrictList=[
   'Thakurgaon',
 ];
 
-List<String> sylhetDistrictList=[
+List<String> sylhetDistrictList = [
+  'Select District',
   'Habiganj',
   'Moulvibazar',
   'Sunamganj',
 ];
 
-List<String> bargunaUpazilaList=[
+List<String> bargunaUpazilaList = [
+  'Select Upazila',
   'Amtali',
   'Bamna',
   'Barguna-S',
@@ -119,7 +126,8 @@ List<String> bargunaUpazilaList=[
   'Taltali',
 ];
 
-List<String> barishalUpazilaList=[
+List<String> barishalUpazilaList = [
+  'Select Upazila',
   'Agailjhara',
   'Babuganj',
   'Bakerganj',
@@ -132,7 +140,8 @@ List<String> barishalUpazilaList=[
   'Uzirpur',
 ];
 
-List<String> bholaUpazilaList=[
+List<String> bholaUpazilaList = [
+  'Select Upazila',
   'Bhola-S',
   'Borhanuddin',
   'Charfassion',
@@ -142,629 +151,689 @@ List<String> bholaUpazilaList=[
   'Tazumuddin',
 ];
 
-List<String> BargunaUpazilaList=[
-'Amtali',
-'Bamna',
-'Barguna-S',
-'Betagi',
-'Patharghata',
-'Taltali',
+List<String> BargunaUpazilaList = [
+  'Select Upazila',
+  'Amtali',
+  'Bamna',
+  'Barguna-S',
+  'Betagi',
+  'Patharghata',
+  'Taltali',
 ];
-List<String> BarisalUpazilaList=[
-'Agailjhara',
-'Babuganj',
-'Bakerganj',
-'Banaripara',
-'Barishal',
-'Gouranadi',
-'Hizla',
-'Mehendiganj',
-'Muladi',
-'Uzirpur',
+List<String> BarisalUpazilaList = [
+  'Select Upazila',
+  'Agailjhara',
+  'Babuganj',
+  'Bakerganj',
+  'Banaripara',
+  'Barishal',
+  'Gouranadi',
+  'Hizla',
+  'Mehendiganj',
+  'Muladi',
+  'Uzirpur',
 ];
-List<String> BholaUpazilaList=[
-'Bhola- S',
-'Borhanuddin',
-'Charfassion',
-'Daulatkhan',
-'Lalmohan',
-'Monpura',
-'Tazumuddin',
+List<String> BholaUpazilaList = [
+  'Select Upazila',
+  'Bhola- S',
+  'Borhanuddin',
+  'Charfassion',
+  'Daulatkhan',
+  'Lalmohan',
+  'Monpura',
+  'Tazumuddin',
 ];
-List<String> JhalokathiUpazilaList=[
-'Jhalokathi-S',
-'Kathalia',
-'Nalchity',
-'Rajapur',
-];
-
-
-
-
-List<String> PatuakhaliUpazilaList=[
-'Bauphal',
-'Dashmina',
-'Dumki',
-'Galachipa',
-'Kalapara',
-'Mirjaganj',
-'Patuakhali-S',
-'Rangabali',
-];
-List<String> PirojpurUpazilaList=[
-'Bhandaria',
-'Kawkhali',
-'Mothbaria',
-'Nazirpur',
-'Nesarabad',
-'Pirojpur-S',
-'Zianagar',
-];
-List<String> B_bariaUpazilaList=[
-'Akhaura',
-'Ashuganj',
-'B_Baria-S',
-'Bancharampur',
-'Bijoynagar',
-'Kasba',
-'Nabinagar',
-'Nasirnagar',
-'Sarail',
-];
-List<String> BandarbanUpazilaList=[
-'Alikadam',
-'Bandarban-S',
-'Lama',
-'Naikhyongchari',
-'Rowangchari',
-'Ruma',
-'Thanchi',
-];
-List<String> ChandpurUpazilaList=[
-'Chandpur-S',
-'Faridganj',
-'Haimchar',
-'Haziganj',
-'Kachua',
-'Matlab(Dakshin)',
-'Matlab (Uttar)',
-'Shahrasti',
-];
-List<String> ChattogramUpazilaList=[
-'Anwara',
-'Banskhali',
-'Boalkhali',
-'Chandanish',
-'Fatikchari',
-'Hathazari',
-'Karnaphuli',
-'Lohagara',
-'Mirsharai',
-'Patiya',
-'Rangunia',
-'Raojan',
-'Sandwip',
-'Satkania',
-'Sitakunda',
-];
-List<String> Cox_bazarUpazilaList=[
-'Chakoria',
-'Cox\'S Bazar-S',
-'Kutubdia',
-'Moheskhali',
-'Pekua',
-'Ramu',
-'Teknaf',
-'Ukhiya',
+List<String> JhalokathiUpazilaList = [
+  'Select Upazila',
+  'Jhalokathi-S',
+  'Kathalia',
+  'Nalchity',
+  'Rajapur',
 ];
 
+List<String> PatuakhaliUpazilaList = [
+  'Select Upazila',
+  'Bauphal',
+  'Dashmina',
+  'Dumki',
+  'Galachipa',
+  'Kalapara',
+  'Mirjaganj',
+  'Patuakhali-S',
+  'Rangabali',
+];
+List<String> PirojpurUpazilaList = [
+  'Select Upazila',
+  'Bhandaria',
+  'Kawkhali',
+  'Mothbaria',
+  'Nazirpur',
+  'Nesarabad',
+  'Pirojpur-S',
+  'Zianagar',
+];
+List<String> B_bariaUpazilaList = [
+  'Select Upazila',
+  'Akhaura',
+  'Ashuganj',
+  'B_Baria-S',
+  'Bancharampur',
+  'Bijoynagar',
+  'Kasba',
+  'Nabinagar',
+  'Nasirnagar',
+  'Sarail',
+];
+List<String> BandarbanUpazilaList = [
+  'Select Upazila',
+  'Alikadam',
+  'Bandarban-S',
+  'Lama',
+  'Naikhyongchari',
+  'Rowangchari',
+  'Ruma',
+  'Thanchi',
+];
+List<String> ChandpurUpazilaList = [
+  'Select Upazila',
+  'Chandpur-S',
+  'Faridganj',
+  'Haimchar',
+  'Haziganj',
+  'Kachua',
+  'Matlab(Dakshin)',
+  'Matlab (Uttar)',
+  'Shahrasti',
+];
+List<String> ChattogramUpazilaList = [
+  'Select Upazila',
+  'Anwara',
+  'Banskhali',
+  'Boalkhali',
+  'Chandanish',
+  'Fatikchari',
+  'Hathazari',
+  'Karnaphuli',
+  'Lohagara',
+  'Mirsharai',
+  'Patiya',
+  'Rangunia',
+  'Raojan',
+  'Sandwip',
+  'Satkania',
+  'Sitakunda',
+];
+List<String> Cox_bazarUpazilaList = [
+  'Select Upazila',
+  'Chakoria',
+  'Cox\'S Bazar-S',
+  'Kutubdia',
+  'Moheskhali',
+  'Pekua',
+  'Ramu',
+  'Teknaf',
+  'Ukhiya',
+];
 
-List<String> CumillaUpazilaList=[
-'Barura',
-'Brahmanpara',
-'Burichong',
-'Chandina',
-'Chouddagram',
-'Cumilla-Sadar',
-'Cumilla-Sadar Daksin',
-'Daudkandi',
-'Debidwar',
-'Homna',
-'Laksham',
-'Lalmai',
-'Meghna',
-'Monohorganj',
-'Muradnagar',
-'Nangalkot',
-'Titas',
+List<String> CumillaUpazilaList = [
+  'Select Upazila',
+  'Barura',
+  'Brahmanpara',
+  'Burichong',
+  'Chandina',
+  'Chouddagram',
+  'Cumilla-Sadar',
+  'Cumilla-Sadar Daksin',
+  'Daudkandi',
+  'Debidwar',
+  'Homna',
+  'Laksham',
+  'Lalmai',
+  'Meghna',
+  'Monohorganj',
+  'Muradnagar',
+  'Nangalkot',
+  'Titas',
 ];
-List<String> FeniUpazilaList=[
-'Chhagalniya',
-'Daganbhuiyan',
-'Feni-Sadar',
-'Fulgazi',
-'Porshuram',
-'Sonagazi',
+List<String> FeniUpazilaList = [
+  'Select Upazila',
+  'Chhagalniya',
+  'Daganbhuiyan',
+  'Feni-Sadar',
+  'Fulgazi',
+  'Porshuram',
+  'Sonagazi',
 ];
-List<String> KhagrachariUpazilaList=[
-'Dighinala',
-'Guimara',
-'Khagrachari-Sadar',
-'Laxmichari',
-'Mahalchari',
-'Manikchari',
-'Matiranga',
-'Panchari',
-'Ramgarh',
+List<String> KhagrachariUpazilaList = [
+  'Select Upazila',
+  'Dighinala',
+  'Guimara',
+  'Khagrachari-Sadar',
+  'Laxmichari',
+  'Mahalchari',
+  'Manikchari',
+  'Matiranga',
+  'Panchari',
+  'Ramgarh',
 ];
-List<String> LaxmipurUpazilaList=[
-'Komol Nagar',
-'Laxmipur-Sadar',
-'Raipur',
-'Ramganj',
-'Ramgati',
+List<String> LaxmipurUpazilaList = [
+  'Select Upazila',
+  'Komol Nagar',
+  'Laxmipur-Sadar',
+  'Raipur',
+  'Ramganj',
+  'Ramgati',
 ];
-List<String> NoakhaliUpazilaList=[
-'Begumganj',
-'Chatkhil',
-'Companiganj',
-'Hatiya',
-'Kabir Hat',
-'Noakhali-Sadar',
-'Senbag',
-'Sonaimuri',
-'Subarna Char',
+List<String> NoakhaliUpazilaList = [
+  'Select Upazila',
+  'Begumganj',
+  'Chatkhil',
+  'Companiganj',
+  'Hatiya',
+  'Kabir Hat',
+  'Noakhali-Sadar',
+  'Senbag',
+  'Sonaimuri',
+  'Subarna Char',
 ];
-List<String> RangamatiUpazilaList=[
-'Baghaichari',
-'Barkal',
-'Belaichari',
-'Juraichari',
-'Kaptai',
-'Kaukhali',
-'Langadu',
-'Nanniarchar',
-'Rajosthali',
-'Rangamati-Sadar',
+List<String> RangamatiUpazilaList = [
+  'Select Upazila',
+  'Baghaichari',
+  'Barkal',
+  'Belaichari',
+  'Juraichari',
+  'Kaptai',
+  'Kaukhali',
+  'Langadu',
+  'Nanniarchar',
+  'Rajosthali',
+  'Rangamati-Sadar',
 ];
-List<String> DhakaUpazilaList=[
-'Dhamrai',
-'Dohar',
-'Keraniganj',
-'Nawabganj',
-'Savar',
+List<String> DhakaUpazilaList = [
+  'Select Upazila',
+  'Dhamrai',
+  'Dohar',
+  'Keraniganj',
+  'Nawabganj',
+  'Savar',
 ];
-List<String> FaridpurUpazilaList=[
-'Alfadanga',
-'Bhanga',
-'Boalmari',
-'Charbhadrasan',
-'Faridpur',
-'Madhukhali',
-'Nagarkanda',
-'Sadarpur',
-'Saltha',
+List<String> FaridpurUpazilaList = [
+  'Select Upazila',
+  'Alfadanga',
+  'Bhanga',
+  'Boalmari',
+  'Charbhadrasan',
+  'Faridpur',
+  'Madhukhali',
+  'Nagarkanda',
+  'Sadarpur',
+  'Saltha',
 ];
-List<String> GazipurUpazilaList=[
-'Gazipur-Sadar',
-'Kaliakoir',
-'Kaliganj',
-'Kapasia',
-'Sreepur',
+List<String> GazipurUpazilaList = [
+  'Select Upazila',
+  'Gazipur-Sadar',
+  'Kaliakoir',
+  'Kaliganj',
+  'Kapasia',
+  'Sreepur',
 ];
-List<String> GopalganjUpazilaList=[
-'Gopalganj-Sadar',
-'Kasiani',
-'Kotwalipara',
-'Muksudpur',
-'Tungipara',
+List<String> GopalganjUpazilaList = [
+  'Select Upazila',
+  'Gopalganj-Sadar',
+  'Kasiani',
+  'Kotwalipara',
+  'Muksudpur',
+  'Tungipara',
 ];
-List<String> KishoreganjUpazilaList=[
-'Austagram',
-'Bajitpur',
-'Bhairab',
-'Hossainpur',
-'Itna',
-'Karimganj',
-'Katiadi',
-'Kishoreganj- Sadar',
-'Kuliarchar',
-'Mithamoin',
-'Nikli',
-'Pakundia',
-'Tarail',
+List<String> KishoreganjUpazilaList = [
+  'Select Upazila',
+  'Austagram',
+  'Bajitpur',
+  'Bhairab',
+  'Hossainpur',
+  'Itna',
+  'Karimganj',
+  'Katiadi',
+  'Kishoreganj- Sadar',
+  'Kuliarchar',
+  'Mithamoin',
+  'Nikli',
+  'Pakundia',
+  'Tarail',
 ];
-List<String> MadaripurUpazilaList=[
-'Kalkini',
-'Madaripur-Sadar',
-'Rajoir',
-'Shibchar',
+List<String> MadaripurUpazilaList = [
+  'Select Upazila',
+  'Kalkini',
+  'Madaripur-Sadar',
+  'Rajoir',
+  'Shibchar',
 ];
-List<String> ManikganjUpazilaList=[
-'Daulatpur',
-'Ghior',
-'Harirampur',
-'Manikganj',
-'Saturia',
-'Shivalaya',
-'Singai',
+List<String> ManikganjUpazilaList = [
+  'Select Upazila',
+  'Daulatpur',
+  'Ghior',
+  'Harirampur',
+  'Manikganj',
+  'Saturia',
+  'Shivalaya',
+  'Singai',
 ];
-List<String> MunshiganjUpazilaList=[
-'Gazaria',
-'Lauhajong',
-'Munshiganj-Sadar',
-'Sirajdikhan',
-'Sreenagar',
-'Tongibari',
+List<String> MunshiganjUpazilaList = [
+  'Select Upazila',
+  'Gazaria',
+  'Lauhajong',
+  'Munshiganj-Sadar',
+  'Sirajdikhan',
+  'Sreenagar',
+  'Tongibari',
 ];
-List<String> NarayanganjUpazilaList=[
-'Araihazar',
-'Bandar',
-'Narayanganj',
-'Rupganj',
-'Sonargaon',
+List<String> NarayanganjUpazilaList = [
+  'Select Upazila',
+  'Araihazar',
+  'Bandar',
+  'Narayanganj',
+  'Rupganj',
+  'Sonargaon',
 ];
-List<String> NarshingdiUpazilaList=[
-'Belabo',
-'Monohardi',
-'Narshingdi-Sadar',
-'Palash',
-'Raipura',
-'Shibpur',
+List<String> NarshingdiUpazilaList = [
+  'Select Upazila',
+  'Belabo',
+  'Monohardi',
+  'Narshingdi-Sadar',
+  'Palash',
+  'Raipura',
+  'Shibpur',
 ];
-List<String> RajbariUpazilaList=[
-'Baliakandi',
-'Goalanda',
-'Kalukhali',
-'Pangsha',
-'Rajbari-Sadar',
-'Bhedarganj',
+List<String> RajbariUpazilaList = [
+  'Select Upazila',
+  'Baliakandi',
+  'Goalanda',
+  'Kalukhali',
+  'Pangsha',
+  'Rajbari-Sadar',
+  'Bhedarganj',
 ];
-List<String> ShariatpurUpazilaList=[
-'Damuddya',
-'Goshairhat',
-'Janjira',
-'Naria',
-'Shariatpur-Sadar',
+List<String> ShariatpurUpazilaList = [
+  'Select Upazila',
+  'Damuddya',
+  'Goshairhat',
+  'Janjira',
+  'Naria',
+  'Shariatpur-Sadar',
 ];
-List<String> TangailUpazilaList=[
-'Basail',
-'Bhuapur',
-'Delduar',
-'Dhanbari',
-'Ghatail',
-'Gopalpur',
-'Kalihati',
-'Madhupur',
-'Mirzapur',
-'Nagarpur',
-'Shakhipur',
-'Tangail-Sadar',
+List<String> TangailUpazilaList = [
+  'Select Upazila',
+  'Basail',
+  'Bhuapur',
+  'Delduar',
+  'Dhanbari',
+  'Ghatail',
+  'Gopalpur',
+  'Kalihati',
+  'Madhupur',
+  'Mirzapur',
+  'Nagarpur',
+  'Shakhipur',
+  'Tangail-Sadar',
 ];
-List<String> BagerhatUpazilaList=[
-'Bagerhat-Sadar',
-'Chitalmari',
-'Fakirhat',
-'Kachua',
-'Mollahat',
-'Mongla',
-'Morrelganj',
-'Rampal',
-'Sharankhola',
+List<String> BagerhatUpazilaList = [
+  'Select Upazila',
+  'Bagerhat-Sadar',
+  'Chitalmari',
+  'Fakirhat',
+  'Kachua',
+  'Mollahat',
+  'Mongla',
+  'Morrelganj',
+  'Rampal',
+  'Sharankhola',
 ];
-List<String> ChuadangaUpazilaList=[
-'Sharankhola',
-'Alamdanga',
-'Chuadanga-Sadar',
-'Damurhuda',
-'Jibannagar',
+List<String> ChuadangaUpazilaList = [
+  'Select Upazila',
+  'Sharankhola',
+  'Alamdanga',
+  'Chuadanga-Sadar',
+  'Damurhuda',
+  'Jibannagar',
 ];
-List<String> JashoreUpazilaList=[
-'Abhoynagar',
-'Bagherpara',
-'Chowgacha',
-'Jashore-Sadar',
-'Jhikargacha',
-'Keshabpur',
-'Monirampur',
-'Sarsha',
+List<String> JashoreUpazilaList = [
+  'Select Upazila',
+  'Abhoynagar',
+  'Bagherpara',
+  'Chowgacha',
+  'Jashore-Sadar',
+  'Jhikargacha',
+  'Keshabpur',
+  'Monirampur',
+  'Sarsha',
 ];
-List<String> JhenaidahUpazilaList=[
-'Harinakunda',
-'Jhenaidah-Sadar',
-'Kaliganj',
-'Kotchandpur',
-'Moheshpur',
-'Shailkupa',
+List<String> JhenaidahUpazilaList = [
+  'Select Upazila',
+  'Harinakunda',
+  'Jhenaidah-Sadar',
+  'Kaliganj',
+  'Kotchandpur',
+  'Moheshpur',
+  'Shailkupa',
 ];
-List<String> KhulnaUpazilaList=[
-'Batiaghata',
-'Dacope',
-'Dighalia',
-'Dumuria',
-'Koira',
-'Paikgacha',
-'Phultala',
-'Rupsa',
-'Terokhada',
+List<String> KhulnaUpazilaList = [
+  'Select Upazila',
+  'Batiaghata',
+  'Dacope',
+  'Dighalia',
+  'Dumuria',
+  'Koira',
+  'Paikgacha',
+  'Phultala',
+  'Rupsa',
+  'Terokhada',
 ];
-List<String> KushtiaUpazilaList=[
-'Bheramara',
-'Daulatpur',
-'Khoksha',
-'Kumarkhali',
-'Kushtia-Sadar',
-'Mirpur',
+List<String> KushtiaUpazilaList = [
+  'Select Upazila',
+  'Bheramara',
+  'Daulatpur',
+  'Khoksha',
+  'Kumarkhali',
+  'Kushtia-Sadar',
+  'Mirpur',
 ];
-List<String> MaguraUpazilaList=[
-'Magura-Sadar',
-'Mohammadpur',
-'Salikha',
-'Sreepur',
+List<String> MaguraUpazilaList = [
+  'Select Upazila',
+  'Magura-Sadar',
+  'Mohammadpur',
+  'Salikha',
+  'Sreepur',
 ];
-List<String> MeherpurUpazilaList=[
-'Gangni',
-'Meherpur-Sadar',
-'Mujib Nagar',
+List<String> MeherpurUpazilaList = [
+  'Select Upazila',
+  'Gangni',
+  'Meherpur-Sadar',
+  'Mujib Nagar',
 ];
-List<String> NarailUpazilaList=[
-'Kalia',
-'Lohagara',
-'Narail-Sadar',
+List<String> NarailUpazilaList = [
+  'Select Upazila',
+  'Kalia',
+  'Lohagara',
+  'Narail-Sadar',
 ];
-List<String> SatkhiraUpazilaList=[
-'Assasuni',
-'Debhata',
-'Kalaroa',
-'Kaliganj',
-'Satkhira-Sadar',
-'Shyamnagar',
-'Tala',
+List<String> SatkhiraUpazilaList = [
+  'Select Upazila',
+  'Assasuni',
+  'Debhata',
+  'Kalaroa',
+  'Kaliganj',
+  'Satkhira-Sadar',
+  'Shyamnagar',
+  'Tala',
 ];
-List<String> JamalpurUpazilaList=[
-'Bakshiganj',
-'Dewanganj',
-'Islampur',
-'Jamalpur-Sadar',
-'Madarganj',
-'Melendah',
-'Sarishabari',
+List<String> JamalpurUpazilaList = [
+  'Select Upazila',
+  'Bakshiganj',
+  'Dewanganj',
+  'Islampur',
+  'Jamalpur-Sadar',
+  'Madarganj',
+  'Melendah',
+  'Sarishabari',
 ];
-List<String> MymensinghUpazilaList=[
-'Bhaluka',
-'Dhobaura',
-'Fulbaria',
-'Gaffargaon',
-'Gouripur',
-'Haluaghat',
-'Ishwarganj',
-'Muktagacha',
-'Mymensingh-Sadar',
-'Nandail',
-'Phulpur',
-'Tarakanda',
-'Trishal',
+List<String> MymensinghUpazilaList = [
+  'Select Upazila',
+  'Bhaluka',
+  'Dhobaura',
+  'Fulbaria',
+  'Gaffargaon',
+  'Gouripur',
+  'Haluaghat',
+  'Ishwarganj',
+  'Muktagacha',
+  'Mymensingh-Sadar',
+  'Nandail',
+  'Phulpur',
+  'Tarakanda',
+  'Trishal',
 ];
-List<String> NetrokonaUpazilaList=[
-'Atpara',
-'Barhatta',
-'Durgapur',
-'Kalmakanda',
-'Khaliajuri',
-'Kendua',
-'Madan',
-'Mohanganj',
-'Netrakona-Sadar',
-'Purbadhala',
+List<String> NetrokonaUpazilaList = [
+  'Select Upazila',
+  'Atpara',
+  'Barhatta',
+  'Durgapur',
+  'Kalmakanda',
+  'Khaliajuri',
+  'Kendua',
+  'Madan',
+  'Mohanganj',
+  'Netrakona-Sadar',
+  'Purbadhala',
 ];
-List<String> SherpurUpazilaList=[
-'Jhenaigati',
-'Nakla',
-'Nalitabari',
-'Sherpur-Sadar',
-'Sreebordi',
+List<String> SherpurUpazilaList = [
+  'Select Upazila',
+  'Jhenaigati',
+  'Nakla',
+  'Nalitabari',
+  'Sherpur-Sadar',
+  'Sreebordi',
 ];
-List<String> BoguraUpazilaList=[
-'Adamdighi',
-'Bogura-Sadar',
-'Dhunot',
-'Dhupchancia',
-'Gabtali',
-'Kahaloo',
-'Nandigram',
-'Sariakandi',
-'Shajahanpur',
-'Sherpur',
-'Shibganj',
-'Sonatala',
+List<String> BoguraUpazilaList = [
+  'Select Upazila',
+  'Adamdighi',
+  'Bogura-Sadar',
+  'Dhunot',
+  'Dhupchancia',
+  'Gabtali',
+  'Kahaloo',
+  'Nandigram',
+  'Sariakandi',
+  'Shajahanpur',
+  'Sherpur',
+  'Shibganj',
+  'Sonatala',
 ];
-List<String> CapainawabganjUpazilaList=[
-'Bholahat',
-'Gomostapur',
-'Nachol',
-'Nawabganj-Sadar',
-'Shibganj',
+List<String> CapainawabganjUpazilaList = [
+  'Select Upazila',
+  'Bholahat',
+  'Gomostapur',
+  'Nachol',
+  'Nawabganj-Sadar',
+  'Shibganj',
 ];
-List<String> JoypurhatUpazilaList=[
-'Akkelpur',
-'Joypurhat-Sadar',
-'Kalai',
-'Khetlal',
-'Panchbibi',
+List<String> JoypurhatUpazilaList = [
+  'Select Upazila',
+  'Akkelpur',
+  'Joypurhat-Sadar',
+  'Kalai',
+  'Khetlal',
+  'Panchbibi',
 ];
-List<String> NaogaonUpazilaList=[
-'Atrai',
-'Badalgachi',
-'Dhamoirhat',
-'Manda',
-'Mohadevpur',
-'Naogaon-Sadar',
-'Niamatpur',
-'Patnitala',
-'Porsha',
-'Raninagar',
-'Shapahar',
+List<String> NaogaonUpazilaList = [
+  'Select Upazila',
+  'Atrai',
+  'Badalgachi',
+  'Dhamoirhat',
+  'Manda',
+  'Mohadevpur',
+  'Naogaon-Sadar',
+  'Niamatpur',
+  'Patnitala',
+  'Porsha',
+  'Raninagar',
+  'Shapahar',
 ];
-List<String> NatoreUpazilaList=[
-'Bagatipara',
-'Baraigram',
-'Gurudaspur',
-'Lalpur',
-'Naldanga',
-'Natore-Sadar',
-'Singra',
+List<String> NatoreUpazilaList = [
+  'Select Upazila',
+  'Bagatipara',
+  'Baraigram',
+  'Gurudaspur',
+  'Lalpur',
+  'Naldanga',
+  'Natore-Sadar',
+  'Singra',
 ];
-List<String> PabnaUpazilaList=[
-'Atghoria',
-'Bera',
-'Bhangura',
-'Chatmohar',
-'Faridpur',
-'Ishwardi',
-'Pabna-Sadar',
-'Santhia',
-'Sujanagar',
+List<String> PabnaUpazilaList = [
+  'Select Upazila',
+  'Atghoria',
+  'Bera',
+  'Bhangura',
+  'Chatmohar',
+  'Faridpur',
+  'Ishwardi',
+  'Pabna-Sadar',
+  'Santhia',
+  'Sujanagar',
 ];
-List<String> RajshahiUpazilaList=[
-'Bagha',
-'Bagmara',
-'Charghat',
-'Durgapur',
-'Godagari',
-'Mohanpur',
-'Paba',
-'Puthia',
-'Tanore',
+List<String> RajshahiUpazilaList = [
+  'Select Upazila',
+  'Bagha',
+  'Bagmara',
+  'Charghat',
+  'Durgapur',
+  'Godagari',
+  'Mohanpur',
+  'Paba',
+  'Puthia',
+  'Tanore',
 ];
-List<String> SirajganjUpazilaList=[
-'Belkuchi',
-'Chowhali',
-'Kamarkhand',
-'Kazipur',
-'Raiganj',
-'Shahzadpur',
-'Sirajganj-Sadar',
-'Tarash',
-'Ullapara',
+List<String> SirajganjUpazilaList = [
+  'Select Upazila',
+  'Belkuchi',
+  'Chowhali',
+  'Kamarkhand',
+  'Kazipur',
+  'Raiganj',
+  'Shahzadpur',
+  'Sirajganj-Sadar',
+  'Tarash',
+  'Ullapara',
 ];
-List<String> DinajpurUpazilaList=[
-'Birampur',
-'Birganj',
-'Birol',
-'Bochaganj',
-'Chirirbandar',
-'Dinajpur-Sadar',
-'Fulbari',
-'Ghoraghat',
-'Hakimpur',
-'Kaharol',
-'Khanshama',
-'Nawabganj',
-'Parbatipur',
+List<String> DinajpurUpazilaList = [
+  'Select Upazila',
+  'Birampur',
+  'Birganj',
+  'Birol',
+  'Bochaganj',
+  'Chirirbandar',
+  'Dinajpur-Sadar',
+  'Fulbari',
+  'Ghoraghat',
+  'Hakimpur',
+  'Kaharol',
+  'Khanshama',
+  'Nawabganj',
+  'Parbatipur',
 ];
-List<String> GaibandhaUpazilaList=[
-'Fulchari',
-'Gaibandha-Sadar',
-'Gobindaganj',
-'Palashbari',
-'Sadullapur',
-'Saghata',
-'Sundarganj',
+List<String> GaibandhaUpazilaList = [
+  'Select Upazila',
+  'Fulchari',
+  'Gaibandha-Sadar',
+  'Gobindaganj',
+  'Palashbari',
+  'Sadullapur',
+  'Saghata',
+  'Sundarganj',
 ];
-List<String> KurigramUpazilaList=[
-'Bhurungamari',
-'Chilmari',
-'Fulbari',
-'Kurigram-Sadar',
-'Nageswari',
-'Rajarhat',
-'Rajibpur',
-'Rowmari',
-'Ulipur',
+List<String> KurigramUpazilaList = [
+  'Select Upazila',
+  'Bhurungamari',
+  'Chilmari',
+  'Fulbari',
+  'Kurigram-Sadar',
+  'Nageswari',
+  'Rajarhat',
+  'Rajibpur',
+  'Rowmari',
+  'Ulipur',
 ];
-List<String> LalmonirhatUpazilaList=[
-'Aditmari',
-'Hatibandha',
-'Kaliganj',
-'Lalmonirhat-Sadar',
-'Patgram',
+List<String> LalmonirhatUpazilaList = [
+  'Select Upazila',
+  'Aditmari',
+  'Hatibandha',
+  'Kaliganj',
+  'Lalmonirhat-Sadar',
+  'Patgram',
 ];
-List<String> NilphamariUpazilaList=[
-'Dimla',
-'Domar',
-'Jaldhaka',
-'Kishoreganj',
-'Nilphamari-Sadar',
-'Sayedpur',
+List<String> NilphamariUpazilaList = [
+  'Select Upazila',
+  'Dimla',
+  'Domar',
+  'Jaldhaka',
+  'Kishoreganj',
+  'Nilphamari-Sadar',
+  'Sayedpur',
 ];
-List<String> PanchagarhUpazilaList=[
-'Atwari',
-'Boda',
-'Debiganj',
-'Panchagarh-Sadar',
-'Tetulia',
+List<String> PanchagarhUpazilaList = [
+  'Select Upazila',
+  'Atwari',
+  'Boda',
+  'Debiganj',
+  'Panchagarh-Sadar',
+  'Tetulia',
 ];
-List<String> RangpurUpazilaList=[
-'Badarganj',
-'Gangachara',
-'Kaunia',
-'Mithapukur',
-'Pirgacha',
-'Pirganj',
-'Rangpur-Sadar',
-'Taraganj',
+List<String> RangpurUpazilaList = [
+  'Select Upazila',
+  'Badarganj',
+  'Gangachara',
+  'Kaunia',
+  'Mithapukur',
+  'Pirgacha',
+  'Pirganj',
+  'Rangpur-Sadar',
+  'Taraganj',
 ];
-List<String> ThakurgaonUpazilaList=[
-'Baliadangi',
-'Haripur',
-'Pirganj',
-'Ranisankail',
-'Thakurgaon-Sadar',
+List<String> ThakurgaonUpazilaList = [
+  'Select Upazila',
+  'Baliadangi',
+  'Haripur',
+  'Pirganj',
+  'Ranisankail',
+  'Thakurgaon-Sadar',
 ];
-List<String> HabiganjUpazilaList=[
-'Azmiriganj',
-'Bahubal',
-'Baniachong',
-'Chunarughat',
-'Habiganj-Sadar',
-'Lakhai',
-'Madhabpur',
-'Nabiganj',
-'Sayestaganj',
+List<String> HabiganjUpazilaList = [
+  'Select Upazila',
+  'Azmiriganj',
+  'Bahubal',
+  'Baniachong',
+  'Chunarughat',
+  'Habiganj-Sadar',
+  'Lakhai',
+  'Madhabpur',
+  'Nabiganj',
+  'Sayestaganj',
 ];
-List<String> MoulvibazarUpazilaList=[
-'Barlekha',
-'Juri',
-'Kamalganj',
-'Kulaura',
-'Moulvibazar-Sadar',
-'Rajnagar',
-'Sreemangal',
+List<String> MoulvibazarUpazilaList = [
+  'Select Upazila',
+  'Barlekha',
+  'Juri',
+  'Kamalganj',
+  'Kulaura',
+  'Moulvibazar-Sadar',
+  'Rajnagar',
+  'Sreemangal',
 ];
-List<String> SunamganjUpazilaList=[
-'Biswamvarpur',
-'Chatak',
-'Dakhin Sunamganj',
-'Dharmapasha',
-'Doarabazar',
-'Jagannathpur',
-'Jamalganj',
-'Sulla',
-'Sunamganj-Sadar',
-'Tahirpur',
+List<String> SunamganjUpazilaList = [
+  'Select Upazila',
+  'Biswamvarpur',
+  'Chatak',
+  'Dakhin Sunamganj',
+  'Dharmapasha',
+  'Doarabazar',
+  'Jagannathpur',
+  'Jamalganj',
+  'Sulla',
+  'Sunamganj-Sadar',
+  'Tahirpur',
 ];
-List<String> SylhetUpazilaList=[
-'Balaganj',
-'Beanibazar',
-'Biswanath',
-'Companiganj',
-'Dakshin Surma',
-'Fenchuganj',
-'Golapganj',
-'Gowainghat',
-'Jointiapur',
-'Kanaighat',
-'Osmaninagar',
-'Sylhet-Sadar',
-'Zakiganj',
+List<String> SylhetUpazilaList = [
+  'Select Upazila',
+  'Balaganj',
+  'Beanibazar',
+  'Biswanath',
+  'Companiganj',
+  'Dakshin Surma',
+  'Fenchuganj',
+  'Golapganj',
+  'Gowainghat',
+  'Jointiapur',
+  'Kanaighat',
+  'Osmaninagar',
+  'Sylhet-Sadar',
+  'Zakiganj',
 ];
