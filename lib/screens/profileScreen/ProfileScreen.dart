@@ -75,6 +75,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    loginEmailController.dispose();
+    loginPassController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     getEmail();
     getUserData();

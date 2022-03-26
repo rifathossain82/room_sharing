@@ -70,6 +70,17 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    titleController.dispose();
+    desController.dispose();
+    locationController.dispose();
+    priceController.dispose();
+    foodPriceController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

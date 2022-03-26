@@ -23,6 +23,14 @@ class _LoginScreenState extends State<LoginScreen> {
   var obscureValue = true;
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    emailController.dispose();
+    passController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(

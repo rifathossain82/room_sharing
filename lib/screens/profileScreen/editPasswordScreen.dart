@@ -21,6 +21,14 @@ class _EditPassworScreenState extends State<EditPassworScreen> {
   bool obscureValue2=true;
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    passController.dispose();
+    confirmPassController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

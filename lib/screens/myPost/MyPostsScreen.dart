@@ -6,11 +6,8 @@ import 'package:room_sharing/screens/myPost/MyPostDetailsScreen.dart';
 import 'package:room_sharing/widgets/appbar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../constraints/colors.dart';
-import '../../services/call_email.dart';
 import '../../model/post.dart';
 import '../../widgets/navigationDrawer/navigationDrawer.dart';
-import '../home/DetailsScreen.dart';
 
 class MyPostsScreen extends StatefulWidget {
   const MyPostsScreen({Key? key}) : super(key: key);
@@ -41,6 +38,13 @@ class _MyPostsScreenState extends State<MyPostsScreen> {
     setState(() {
       email = sharedPreferences.getString('email')!;
     });
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    searchController.dispose();
   }
 
   @override

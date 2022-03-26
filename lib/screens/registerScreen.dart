@@ -120,6 +120,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
   File? file2;
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    firstNameController.dispose();
+    lastNameController.dispose();
+    emailController.dispose();
+    phoneController.dispose();
+    addressController.dispose();
+    nidNumberController.dispose();
+    passController.dispose();
+    confirmPassController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,

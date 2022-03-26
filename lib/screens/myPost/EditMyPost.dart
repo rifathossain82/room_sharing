@@ -58,10 +58,22 @@ class _EditMyPostState extends State<EditMyPost> {
     loadSomeData();
   }
 
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    controller.startAutoPlay();
+
+    titleController.dispose();
+    desController.dispose();
+    locationController.dispose();
+    priceController.dispose();
+    foodPriceController.dispose();
+  }
+
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text('Update Post'),
@@ -500,7 +512,6 @@ class _EditMyPostState extends State<EditMyPost> {
     return File(imagePath).copy(image.path);
   }
 
-
   void loadSomeData(){
     if (widget.post.food_status.contains('Yes')) {
       setState(() {
@@ -527,6 +538,7 @@ class _EditMyPostState extends State<EditMyPost> {
       imageFileList.add(widget.post.img5);
     }
   }
+
   void findAuthor() {
     FirebaseFirestore.instance
         .collection('user')

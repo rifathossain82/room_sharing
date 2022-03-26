@@ -53,13 +53,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
   }
 
   @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    commentController.clear();
-  }
-
-  @override
   Widget build(BuildContext context) {
     findAuthor();
     findUser();

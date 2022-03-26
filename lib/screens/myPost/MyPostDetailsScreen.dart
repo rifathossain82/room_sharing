@@ -1,15 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:room_sharing/screens/myPost/EditMyPost.dart';
 import 'package:room_sharing/model/post.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../constraints/colors.dart';
-import '../../services/call_email.dart';
 import '../../widgets/appbar.dart';
 
 class MyPostDetailsScreen extends StatefulWidget {

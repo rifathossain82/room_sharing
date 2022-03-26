@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../widgets/appbar.dart';
@@ -16,6 +15,13 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
 
   TextEditingController addressController=TextEditingController();
   final formKey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    addressController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

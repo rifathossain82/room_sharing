@@ -18,6 +18,13 @@ class _EditPhoneScreenState extends State<EditPhoneScreen> {
   final formKey = GlobalKey<FormState>();
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    numberController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

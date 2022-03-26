@@ -22,6 +22,15 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   final formKey = GlobalKey<FormState>();
   int clickTime=0;
 
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    lastNameController.dispose();
+    emailController.dispose();
+    phoneController.dispose();
+  }
+
 
   @override
   Widget build(BuildContext context) {
